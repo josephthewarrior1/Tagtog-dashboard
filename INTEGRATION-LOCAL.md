@@ -8,11 +8,11 @@ The portal login/logout flow has been checked against an isolated local EMS-IAM.
 
 The PMS prototype source uses clean checkouts of GitHub `main` fetched on 20 October 2026, with TAGTOG SSO changes applied locally:
 
-| App | Clean base | Integration branch | Local source |
+| App | Clean base | Integration source | Local source |
 | --- | --- | --- | --- |
-| PMS frontend | `34c57e8` | `codex/tagtog-sso-local-latest-20261021` | `.local/worktrees/pms_fe` |
-| PMS backend | `a13d465` | `codex/tagtog-sso-local-latest-20261021` | `.local/worktrees/pms_be` |
-| EMS-IAM | `8879a8a` | `codex/tagtog-sso-local-20261021` | `../ems-v2/EMS-IAM` |
+| PMS frontend | `34c57e8` | `local checkout` | `.local/worktrees/pms_fe` |
+| PMS backend | `a13d465` | `local checkout` | `.local/worktrees/pms_be` |
+| EMS-IAM | `8879a8a` | `local checkout` | `../ems-v2/EMS-IAM` |
 
 IAM and PMS source, JARs, local worktrees, database volumes, and credentials are not included in this repository. The original PMS folders and unrelated changes remain separate from the prototype checkouts. Uploading this portal does not publish changes to those repositories or deploy the stack.
 
@@ -47,7 +47,7 @@ The following describes the intended behavior of the local source changes, not a
 3. **PMS account links:** explicitly link an IAM user ID to the intended existing PMS user ID. Email similarity does not create a link. Existing PMS project membership, ownership, and roles remain relevant.
 4. Open PMS through TAGTOG. With the integration changes and SSO enabled, PMS uses central login and requires a bound PMS session.
 
-The PMS prototype checks both central grants and existing project/role restrictions. Revocation, account deactivation, link changes, and global sign-out must be validated against the rebuilt runtime before acceptance. EMS and CRM integration are not enabled.
+The PMS prototype checks both central grants and existing project/role restrictions. Revocation, account deactivation, link changes, and global sign-out must be validated against the rebuilt PMS runtime before acceptance. EMS portal integration is not enabled. A separate [local CRM login prototype](CRM-LOCAL.md) uses its own SSO client, clean CRM worktrees, and dedicated database; it does not implement company isolation or account packages.
 
 ## Login flow and storage
 

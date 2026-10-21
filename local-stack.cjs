@@ -4,6 +4,7 @@ const fs=require('node:fs');
 const path=require('node:path');
 const crypto=require('node:crypto');
 const cp=require('node:child_process');
+const net=require('node:net');
 const root=__dirname;
 const local=path.join(root,'.local');
 const configFile=path.join(local,'local-config.json');
@@ -53,15 +54,24 @@ function launch(name,binary,args,cwd,env){
   const child=cp.spawn(binary,args,{cwd,env:{...process.env,...env},windowsHide:true,detached:true,stdio:['ignore',out,out]});child.unref();fs.closeSync(out);
   return{pid:child.pid,startedAt:new Date().toISOString(),binary,logfile};
 }
+function portOpen(port){
+  return new Promise(resolve=>{
+    const socket=net.connect({host:'127.0.0.1',port});let settled=false;
+    const finish=open=>{if(!settled){settled=true;socket.destroy();resolve(open);}};
+    socket.setTimeout(500);socket.once('connect',()=>finish(true));
+    socket.once('error',()=>finish(false));socket.once('timeout',()=>finish(false));
+  });
+}
 async function start(){
   const c=config();const java=process.env.TAGTOG_JAVA||'C:\\Program Files\\Android\\Android Studio\\jbr\\bin\\java.exe';
   const stateFile=path.join(local,'processes.json');let processes=fs.existsSync(stateFile)?JSON.parse(fs.readFileSync(stateFile)):{};
   for(const name of ['iam','pmsBackend','pmsFrontend','portal']){
     const port={iam:8181,pmsBackend:8182,pmsFrontend:8184,portal:4180}[name];
-    try{const response=await fetch('http://127.0.0.1:'+port+(name==='portal'?'/api/health':name==='pmsFrontend'?'/login':name==='iam'?'/actuator/health':'/api/auth/me'),{signal:AbortSignal.timeout(1500),redirect:'manual'});if(response.status){process.stdout.write(name+' already listening on '+port+'; left running.\n');continue;}}catch{}
+    // A listening socket owns the port even while its HTTP app is compiling or warming up.
+    if(await portOpen(port)){process.stdout.write(name+' already listening on '+port+'; left running.\n');continue;}
     if(name==='iam'){
       const db=c.database.iam;
-      processes[name]=launch(name,java,['-jar',jar(c.repos.iam),'--server.address=127.0.0.1','--server.port=8181'],c.repos.iam,{DATABASE_URL:`jdbc:postgresql://127.0.0.1:${db.port}/${db.name}`,DB_USERNAME:db.user,DB_PASSWORD:db.password,IAM_ADMIN_EMAIL:c.iamAdmin.email,IAM_ADMIN_PASSWORD:c.iamAdmin.password,IAM_SSO_CLIENT_ID:'pms-local',IAM_SSO_CLIENT_SECRET:c.ssoSecret,IAM_SSO_REDIRECT_URI:'http://127.0.0.1:8184/api/tagtog/callback',IAM_SSO_SYSTEM_CODE:'PMS',IAM_RSA_KEY_PATH:path.join(local,'iam-signing-key.json'),JWT_ISSUER:'http://127.0.0.1:8181',CORS_ALLOWED_ORIGINS:'http://127.0.0.1:4180,http://127.0.0.1:8184'});
+      processes[name]=launch(name,java,['-jar',jar(c.repos.iam),'--server.address=127.0.0.1','--server.port=8181'],c.repos.iam,{DATABASE_URL:`jdbc:postgresql://127.0.0.1:${db.port}/${db.name}`,DB_USERNAME:db.user,DB_PASSWORD:db.password,IAM_ADMIN_EMAIL:c.iamAdmin.email,IAM_ADMIN_PASSWORD:c.iamAdmin.password,IAM_SSO_CLIENT_ID:'pms-local',IAM_SSO_CLIENT_SECRET:c.ssoSecret,IAM_SSO_REDIRECT_URI:'http://127.0.0.1:8184/api/tagtog/callback',IAM_SSO_SYSTEM_CODE:'PMS',...(c.crm?.enabled?{IAM_CRM_SSO_CLIENT_ID:'crm-local',IAM_CRM_SSO_CLIENT_SECRET:c.crm.ssoSecret,IAM_CRM_SSO_REDIRECT_URI:'http://127.0.0.1:8188/api/tagtog/callback',IAM_CRM_SSO_SYSTEM_CODE:'CRM'}:{}),IAM_RSA_KEY_PATH:path.join(local,'iam-signing-key.json'),JWT_ISSUER:'http://127.0.0.1:8181',CORS_ALLOWED_ORIGINS:'http://127.0.0.1:4180,http://127.0.0.1:8184'+(c.crm?.enabled?',http://127.0.0.1:8188':'')});
     }else if(name==='pmsBackend'){
       const db=c.database.pms;
       processes[name]=launch(name,java,['-jar',jar(c.repos.pmsBackend),'--spring.profiles.active=tagtog-local'],c.repos.pmsBackend,{SPRING_DATASOURCE_USERNAME:db.user,SPRING_DATASOURCE_PASSWORD:db.password,TAGTOG_SSO_ENABLED:'true',TAGTOG_IAM_BASE_URL:'http://127.0.0.1:8181',TAGTOG_SSO_CLIENT_ID:'pms-local',TAGTOG_SSO_CLIENT_SECRET:c.ssoSecret,TAGTOG_SSO_REDIRECT_URI:'http://127.0.0.1:8184/api/tagtog/callback'});
@@ -85,4 +95,4 @@ async function stop(){
   for(const db of Object.values(c.database)){if(/^tagtog-local-(iam|pms)-db$/.test(db.container)&&run('docker',['inspect','--format','{{index .Config.Labels "com.tagtog.local"}}',db.container]).trim()==='true')run('docker',['stop',db.container]);}
 }
 if(require.main===module){const command=process.argv[2];Promise.resolve().then(()=>command==='prepare'?prepare():command==='start'?start():command==='status'?status():command==='stop'?stop():Promise.reject(new Error('Use prepare, start, status, or stop.'))).catch(error=>{process.stderr.write(error.message+'\n');process.exitCode=1;});}
-module.exports={config,sql};
+module.exports={config,sql,portOpen};

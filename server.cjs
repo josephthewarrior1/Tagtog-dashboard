@@ -27,12 +27,15 @@ function safeReturnTo(value) {
 }
 function validateSsoRequest(url, config) {
   const expected = ['client_id','redirect_uri','code_challenge','code_challenge_method','state'];
-  for (const key of expected) if (url.searchParams.getAll(key).length !== 1) throw new HttpError(400,'Incomplete sign-in request. Start again from PMS.');
+  for (const key of expected) if (url.searchParams.getAll(key).length !== 1) throw new HttpError(400,'Incomplete sign-in request. Start again from your application.');
   const clientId = url.searchParams.get('client_id');
   const redirectUri = url.searchParams.get('redirect_uri');
   const challenge = url.searchParams.get('code_challenge');
   const state = url.searchParams.get('state');
-  if (clientId !== config.ssoClientId || redirectUri !== config.pmsCallbackUri || url.searchParams.get('code_challenge_method') !== 'S256' || !/^[A-Za-z0-9_-]{43}$/.test(challenge) || !/^[A-Za-z0-9_-]{32,128}$/.test(state)) throw new HttpError(400,'The application sign-in request is not valid. Start again from PMS.');
+  const clients = [{id:config.ssoClientId, callback:config.pmsCallbackUri}];
+  if (config.crmEnabled === true) clients.push({id:config.crmSsoClientId, callback:config.crmCallbackUri});
+  const client = clients.find(item => item.id === clientId);
+  if (!client || redirectUri !== client.callback || url.searchParams.get('code_challenge_method') !== 'S256' || !/^[A-Za-z0-9_-]{43}$/.test(challenge) || !/^[A-Za-z0-9_-]{32,128}$/.test(state)) throw new HttpError(400,'The application sign-in request is not valid. Start again from your application.');
   return {clientId,redirectUri,codeChallenge:challenge,codeChallengeMethod:'S256',state};
 }
 async function readJson(request) {
@@ -50,13 +53,16 @@ function createPortalServer(options={}) {
     root:__dirname, portalOrigin:'http://127.0.0.1:4180', iamBaseUrl:'http://127.0.0.1:8181',
     pmsBaseUrl:'http://127.0.0.1:8182', pmsFrontendUrl:'http://127.0.0.1:8184',
     pmsCallbackUri:'http://127.0.0.1:8184/api/tagtog/callback', ssoClientId:'pms-local',
+    crmEnabled:false, crmBaseUrl:'http://127.0.0.1:8186', crmFrontendUrl:'http://127.0.0.1:8188',
+    crmCallbackUri:'http://127.0.0.1:8188/api/tagtog/callback', crmSsoClientId:'crm-local',
     sessionTtlMs:12*60*60*1000, fetch:globalThis.fetch, ...options
   };
-  for (const name of ['portalOrigin','iamBaseUrl','pmsBaseUrl','pmsFrontendUrl']) {
+  for (const name of ['portalOrigin','iamBaseUrl','pmsBaseUrl','pmsFrontendUrl','crmBaseUrl','crmFrontendUrl']) {
     const parsed=new URL(config[name]);
     if (!['http:','https:'].includes(parsed.protocol) || parsed.username || parsed.password || parsed.search || parsed.hash) throw new Error('Invalid '+name);
     config[name]=parsed.origin;
   }
+  if (config.crmEnabled && (config.crmEnabled !== true || config.crmSsoClientId === config.ssoClientId || config.crmCallbackUri !== config.crmFrontendUrl+'/api/tagtog/callback')) throw new Error('Invalid CRM client registration');
   const secure=new URL(config.portalOrigin).protocol==='https:';
   const sessions=new Map(); const loginAttempts=new Map();
   function setCookie(res, id, ttl=Math.floor(config.sessionTtlMs/1000)) { res.setHeader('Set-Cookie',`tagtog_session=${id}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${ttl}${secure?'; Secure':''}`); }
@@ -73,7 +79,7 @@ function createPortalServer(options={}) {
     let payload=null;
     if (response.status!==204) {try {payload=await response.json();} catch {if(response.ok)throw new HttpError(502,'The sign-in service returned an invalid response.');}}
     if (!response.ok) {
-      const message=response.status===401?'Your sign-in details or session are not valid.':response.status===403?'You do not have permission for this action.':response.status===409?'This account needs to be linked to an existing PMS user.':response.status===400?'Please check the entered details.':'The request could not be completed.';
+      const message=response.status===401?'Your sign-in details or session are not valid.':response.status===403?'You do not have permission for this action.':response.status===409?'This account needs an explicit link to the correct existing application user.':response.status===400?'Please check the entered details.':'The request could not be completed.';
       throw new HttpError([400,401,403,404,409,422,429].includes(response.status)?response.status:502,message);
     }
     return payload && Object.hasOwn(payload,'data') ? payload.data : payload;
@@ -103,7 +109,7 @@ function createPortalServer(options={}) {
   async function sessionView(session) {
     const [systems,permissions]=await Promise.all([iam(session,'/api/me/systems'),iam(session,'/api/me/permissions')]);
     const aliases={pms:['PMS'],crm:['CRM'],ems:['EMS','EVENT_ADMIN']};
-    const apps=Object.entries(aliases).filter(([,codes])=>(systems||[]).some(system=>codes.includes(system.code))).map(([id])=>({id,launchUrl:id==='pms'?config.pmsFrontendUrl+'/api/tagtog/start':null}));
+    const apps=Object.entries(aliases).filter(([,codes])=>(systems||[]).some(system=>codes.includes(system.code))).map(([id])=>({id,launchUrl:id==='pms'?config.pmsFrontendUrl+'/api/tagtog/start':id==='crm'&&config.crmEnabled?config.crmFrontendUrl+'/api/tagtog/start':null}));
     return {user:session.user,isAdmin:isAdmin(session.user),csrfToken:session.csrfToken,apps,systems:systems||[],permissions:permissions||[]};
   }
   const publicFiles=new Set(['login.js','auth.css','styles.css','app.js','config.js','admin.js','admin.css']);
@@ -142,7 +148,7 @@ function createPortalServer(options={}) {
         try {
           await iam(session,'/api/sso/logout',{method:'POST',body:{}});
           await upstream(config.iamBaseUrl,'/api/auth/logout',{method:'POST',body:{refreshToken:session.refreshToken}});
-        }catch{throw new HttpError(503,'Signed out of TAGTOG. PMS sign-out could not be confirmed; contact your administrator.');}
+        }catch{throw new HttpError(503,'Signed out of TAGTOG. Application sign-out could not be confirmed; contact your administrator.');}
         finally{sessions.delete(cookieValue(request));clearCookie(res);}
         return json(res,200,{signedOut:true});
       }
@@ -150,7 +156,7 @@ function createPortalServer(options={}) {
         const sso=validateSsoRequest(url,config);const session=await authenticate(request,res,{optional:true});
         if(!session)return redirect(res,'/login?returnTo='+encodeURIComponent(url.pathname+url.search));
         const authorization=await iam(session,'/api/sso/authorize',{method:'POST',body:{clientId:sso.clientId,redirectUri:sso.redirectUri,codeChallenge:sso.codeChallenge,codeChallengeMethod:'S256'}});
-        if(typeof authorization?.code!=='string')throw new HttpError(502,'Unable to open PMS. Please try again.');
+        if(typeof authorization?.code!=='string')throw new HttpError(502,'Unable to open the application. Please try again.');
         const target=new URL(sso.redirectUri);target.searchParams.set('code',authorization.code);target.searchParams.set('state',sso.state);return redirect(res,target.href);
       }
       if(pathname.startsWith('/api/admin/')) {
@@ -166,10 +172,13 @@ function createPortalServer(options={}) {
           if(/^\/roles\/\d+$/.test(route)&&['PUT','DELETE'].includes(request.method)){const roles=await iam(session,'/api/roles');const role=roles.find(item=>String(item.id)===route.split('/')[2]);if(role?.code==='SUPER_ADMIN'&&(request.method==='DELETE'||body?.status!=='ACTIVE'))throw new HttpError(409,'Keep the administrator role active.');}
           const result=await iam(session,'/api'+route,{method:request.method,body});return json(res,200,result??{saved:true});
         }
-        if(/^\/pms\/(users|links(?:\/\d+)?)$/.test(route)) {
+        const applicationRoute = route.match(/^\/(pms|crm)\/(users|links(?:\/[1-9]\d*)?)$/);
+        if(applicationRoute) {
+          const app = applicationRoute[1];
+          if(app==='crm'&&!config.crmEnabled)throw new HttpError(404,'CRM integration is not enabled.');
           const body=request.method==='GET'||request.method==='DELETE'?undefined:await readJson(request);
-          const endpoint='/api/tagtog/admin'+route.slice('/pms'.length);
-          const result=await upstream(config.pmsBaseUrl,endpoint,{method:request.method,token:session.accessToken,body});return json(res,200,result??{saved:true});
+          const endpoint='/api/tagtog/admin/'+applicationRoute[2];
+          const result=await upstream(app==='crm'?config.crmBaseUrl:config.pmsBaseUrl,endpoint,{method:request.method,token:session.accessToken,body});return json(res,200,result??{saved:true});
         }
         throw new HttpError(404,'Unknown access-management action.');
       }
@@ -199,7 +208,7 @@ function createPortalServer(options={}) {
 }
 async function loadConfig() {
   let local={};try{local=JSON.parse(await fs.readFile(process.env.TAGTOG_LOCAL_CONFIG||path.join(__dirname,'.local','local-config.json'),'utf8'));}catch(error){if(error.code!=='ENOENT')throw error;}
-  return {...(local.portal||{}),...(process.env.TAGTOG_IAM_URL?{iamBaseUrl:process.env.TAGTOG_IAM_URL}:{}),...(process.env.TAGTOG_PMS_API_URL?{pmsBaseUrl:process.env.TAGTOG_PMS_API_URL}:{}),...(process.env.TAGTOG_PMS_URL?{pmsFrontendUrl:process.env.TAGTOG_PMS_URL}:{}),...(process.env.TAGTOG_ORIGIN?{portalOrigin:process.env.TAGTOG_ORIGIN}:{})};
+  return {...(local.portal||{}),...(process.env.TAGTOG_IAM_URL?{iamBaseUrl:process.env.TAGTOG_IAM_URL}:{}),...(process.env.TAGTOG_PMS_API_URL?{pmsBaseUrl:process.env.TAGTOG_PMS_API_URL}:{}),...(process.env.TAGTOG_PMS_URL?{pmsFrontendUrl:process.env.TAGTOG_PMS_URL}:{}),...(process.env.TAGTOG_CRM_ENABLED?{crmEnabled:process.env.TAGTOG_CRM_ENABLED==='true'}:{}),...(process.env.TAGTOG_CRM_API_URL?{crmBaseUrl:process.env.TAGTOG_CRM_API_URL}:{}),...(process.env.TAGTOG_CRM_URL?{crmFrontendUrl:process.env.TAGTOG_CRM_URL}:{}),...(process.env.TAGTOG_ORIGIN?{portalOrigin:process.env.TAGTOG_ORIGIN}:{})};
 }
 if(require.main===module)loadConfig().then(config=>{const server=createPortalServer(config);const origin=new URL(config.portalOrigin||'http://127.0.0.1:4180');server.listen(Number(origin.port||80),'127.0.0.1',()=>process.stdout.write(`TAGTOG portal: ${origin.origin}\n`));}).catch(()=>{process.stderr.write('TAGTOG configuration is invalid. Check the local setup.\n');process.exitCode=1;});
 module.exports={createPortalServer,safeReturnTo,validateSsoRequest};

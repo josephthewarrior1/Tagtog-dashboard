@@ -1,7 +1,8 @@
 (() => {
   'use strict';
   const $ = selector => document.querySelector(selector);
-  const state = { session: null, users: [], roles: [], pmsUsers: [], links: [], tab: 'users', filter: '' };
+  const state = { session: null, users: [], roles: [], appUsers: [], links: [], tab: 'users', filter: '', mappingApp: 'pms' };
+  let mappingVersion = 0;
   const dialog = $('#admin-dialog');
   let dialogVersion = 0;
   let returnFocus = null;
@@ -177,7 +178,7 @@
     const code = field('Role code', 'input', { required: true, pattern: '[A-Z][A-Z0-9_]{1,49}', maxlength: 50, placeholder: 'PMS_PROJECT_MANAGER', autocomplete: 'off' });
     const name = field('Role name', 'input', { required: true, maxlength: 120 });
     const description = field('Description', 'textarea', { maxlength: 500 });
-    const form = element('form', {}, code.view, name.view, description.view, element('p', { class: 'form-hint' }, 'Use an uppercase code with letters, numbers, and underscores. Next, choose PMS access and CRUD permissions.'), formActions('Create & configure access'));
+    const form = element('form', {}, code.view, name.view, description.view, element('p', { class: 'form-hint' }, 'Use an uppercase code with letters, numbers, and underscores. Next, choose application access and CRUD permissions.'), formActions('Create & configure access'));
     wireForm(form, async () => {
       const created = await api('/api/admin/roles', 'POST', { code: code.input.value.trim(), name: name.input.value.trim(), description: description.input.value.trim() });
       closeDialog(); notify('Role created. Choose its application access and permissions next.');
@@ -185,7 +186,7 @@
       const role = state.roles.find(item => String(item.id) === String(created?.id)) || state.roles.find(item => item.code === code.input.value.trim());
       if (role) await editRoleAccess(role);
     });
-    openDialog('Create role', 'Define a role, then configure which PMS operations it can use.', form);
+    openDialog('Create role', 'Define a role, then configure which application operations it can use.', form);
   }
   function editRole(role) {
     const name = field('Role name', 'input', { required: true, maxlength: 120, value: role.name || '' });
@@ -206,12 +207,12 @@
       if (!Array.isArray(systems) || !Array.isArray(permissions)) throw new Error('The access service returned invalid role details.');
       const choices = systems.map(system => ({ system, ...check(system.name || system.code, system.hasAccess === true, `${system.code} · ${system.status}`) }));
       choices.forEach(choice => { if (choice.system.status !== 'ENABLED') choice.input.disabled = true; });
-      const fields = permissions.filter(permission => permission.systemCode === 'PMS').map(permission => ({ permission, checks: ['canView', 'canCreate', 'canEdit', 'canDelete'].map(key => ({ key, input: element('input', { type: 'checkbox', checked: permission[key] === true, 'aria-label': `${key.replace('can', '')} ${permission.featureName || permission.featureCode}` }) })) }));
-      const permissionTable = table(['PMS feature', 'View', 'Create', 'Edit', 'Delete'], fields.map(row => element('tr', {}, element('td', {}, element('strong', {}, row.permission.featureName || row.permission.featureCode), element('small', {}, row.permission.route || row.permission.featureCode)), row.checks.map(check => element('td', {}, check.input)))));
+      const fields = permissions.filter(permission => ['PMS','CRM'].includes(permission.systemCode)).map(permission => ({ permission, checks: ['canView', 'canCreate', 'canEdit', 'canDelete'].map(key => ({ key, input: element('input', { type: 'checkbox', checked: permission[key] === true, 'aria-label': `${key.replace('can', '')} ${permission.systemCode} ${permission.featureName || permission.featureCode}` }) })) }));
+      const permissionTable = table(['Application feature', 'View', 'Create', 'Edit', 'Delete'], fields.map(row => element('tr', {}, element('td', {}, element('strong', {}, `${row.permission.systemCode} · ${row.permission.featureName || row.permission.featureCode}`), element('small', {}, row.permission.route || row.permission.featureCode)), row.checks.map(check => element('td', {}, check.input)))));
       permissionTable.className = 'permission-table';
       const form = element('form', {},
         element('fieldset', {}, element('legend', {}, 'Application access'), element('div', { class: 'checkbox-list' }, choices.length ? choices.map(choice => choice.view) : 'No systems are configured.')),
-        element('fieldset', {}, element('legend', {}, 'PMS permissions'), element('p', { class: 'form-hint' }, 'Enable PMS access above, then choose each operation. Permissions for other applications remain unchanged.'), fields.length ? element('div', { class: 'permission-wrap' }, permissionTable) : element('div', { class: 'notice' }, 'No PMS feature definitions are available yet.')),
+        element('fieldset', {}, element('legend', {}, 'PMS & CRM permissions'), element('p', { class: 'form-hint' }, 'Enable application access above, then choose each operation. Other feature permissions are preserved.'), fields.length ? element('div', { class: 'permission-wrap' }, permissionTable) : element('div', { class: 'notice' }, 'No PMS or CRM feature definitions are available yet.')),
         formActions('Save access & permissions'));
       wireForm(form, async () => {
         const updates = new Map(fields.map(row => [String(row.permission.featureId), row]));
@@ -232,53 +233,62 @@
   }
 
   function renderMappings() {
+    const app = state.mappingApp;
+    const label = app.toUpperCase();
+    const userKey = app + 'UserId';
     const identity = field('Central IAM identity', 'select', { required: true, value: '' }, [element('option', { value: '' }, 'Choose central account'), ...state.users.map(user => element('option', { value: recordId(user.id) }, `${userName(user)} · ${user.email || 'No email'} · IAM ID ${user.id}`))]);
-    const pms = field('Existing PMS account', 'select', { required: true, value: '' }, [element('option', { value: '' }, 'Choose PMS account explicitly'), ...state.pmsUsers.map(user => element('option', { value: recordId(user.id) }, `${userName(user)} · ${user.email || 'No email'} · PMS ID ${user.id}${user.active === false || user.approved === false ? ' · inactive/unapproved' : ''}`))]);
+    const localAccount = field(`Existing ${label} account`, 'select', { required: true, value: '' }, [element('option', { value: '' }, `Choose ${label} account explicitly`), ...state.appUsers.map(user => element('option', { value: recordId(user.id) }, `${userName(user)} · ${user.email || 'No email'} · ${label} ID ${user.id}${user.active === false || user.approved === false ? ' · inactive/unapproved' : ''}`))]);
     const confirmed = check('I have checked both records and confirm this is the correct account mapping.');
     confirmed.input.required = true;
     confirmed.view.className = 'confirm-label';
-    const currentMapping = element('p', { class: 'form-hint', 'aria-live': 'polite' }, 'Select a central identity and a PMS account.');
+    const currentMapping = element('p', { class: 'form-hint', 'aria-live': 'polite' }, `Select a central identity and a ${label} account.`);
     const resetConfirmation = () => {
       confirmed.input.checked = false;
       const existing = state.links.find(link => String(link.subject) === identity.input.value);
-      currentMapping.textContent = existing ? `This identity is currently linked to PMS user ID ${existing.pmsUserId}. Saving a replacement ends its existing PMS SSO sessions.` : 'No existing link is selected. Account selection is always manual.';
+      currentMapping.textContent = existing ? `This identity is currently linked to ${label} user ID ${existing[userKey]}. Saving a replacement ends its existing ${label} SSO sessions.` : 'No existing link is selected. Account selection is always manual.';
     };
     identity.input.addEventListener('change', resetConfirmation);
-    pms.input.addEventListener('change', resetConfirmation);
-    const form = element('form', { class: 'mapping-card' }, element('div', { class: 'mapping-grid' }, identity.view, pms.view), currentMapping, confirmed.view, element('div', { class: 'form-actions' }, element('button', { type: 'submit', class: 'primary-button' }, 'Save explicit link')));
+    localAccount.input.addEventListener('change', resetConfirmation);
+    const form = element('form', { class: 'mapping-card' }, element('div', { class: 'mapping-grid' }, identity.view, localAccount.view), currentMapping, confirmed.view, element('div', { class: 'form-actions' }, element('button', { type: 'submit', class: 'primary-button' }, 'Save explicit link')));
     wireForm(form, async () => {
       const subject = recordId(identity.input.value);
-      await api(`/api/admin/pms/links/${subject}`, 'PUT', { pmsUserId: numericId(pms.input.value) });
-      notify('Explicit IAM-to-PMS account link saved.'); await loadMappings();
+      await api(`/api/admin/${app}/links/${subject}`, 'PUT', { [userKey]: numericId(localAccount.input.value) });
+      notify(`Explicit IAM-to-${label} account link saved.`); await loadMappings();
     });
     $('#mapping-form').replaceChildren(form);
     const rows = state.links.map(link => {
       const central = state.users.find(user => String(user.id) === String(link.subject));
-      const target = state.pmsUsers.find(user => String(user.id) === String(link.pmsUserId));
-      const edit = button('Edit link', () => { identity.input.value = String(link.subject); pms.input.value = String(link.pmsUserId); resetConfirmation(); identity.input.focus(); }, 'text-button');
+      const target = state.appUsers.find(user => String(user.id) === String(link[userKey]));
+      const edit = button('Edit link', () => { identity.input.value = String(link.subject); localAccount.input.value = String(link[userKey]); resetConfirmation(); identity.input.focus(); }, 'text-button');
       return element('tr', {}, element('td', {}, element('strong', {}, central ? userName(central) : `IAM ID ${link.subject}`), element('small', {}, `IAM ID ${link.subject}`, central?.email ? ` · ${central.email}` : '')),
-        element('td', {}, element('strong', {}, target ? userName(target) : `PMS ID ${link.pmsUserId}`), element('small', {}, `PMS ID ${link.pmsUserId}`, target?.email ? ` · ${target.email}` : '')),
-        element('td', {}, dateText(link.updatedAt)), element('td', {}, element('div', { class: 'cell-actions' }, edit, button('Remove link', () => removeMapping(link, central), 'text-button'))));
+        element('td', {}, element('strong', {}, target ? userName(target) : `${label} ID ${link[userKey]}`), element('small', {}, `${label} ID ${link[userKey]}`, target?.email ? ` · ${target.email}` : '')),
+        element('td', {}, dateText(link.updatedAt)), element('td', {}, element('div', { class: 'cell-actions' }, edit, button('Remove link', () => removeMapping(app, link, central), 'text-button'))));
     });
-    $('#links-table').replaceChildren(rows.length ? table(['IAM identity', 'PMS account', 'Updated', 'Actions'], rows) : empty('No account links have been created.'));
+    $('#links-table').replaceChildren(rows.length ? table(['IAM identity', `${label} account`, 'Updated', 'Actions'], rows) : empty('No account links have been created.'));
   }
-  function removeMapping(link, user) {
-    const form = element('form', {}, element('div', { class: 'notice' }, 'Removing this link ends existing PMS SSO sessions for this identity. The IAM and PMS accounts remain available separately.'), formActions('Remove account link'));
+  function removeMapping(app, link, user) {
+    const label = app.toUpperCase();
+    const form = element('form', {}, element('div', { class: 'notice' }, `Removing this link ends existing ${label} SSO sessions for this identity. The IAM and ${label} accounts remain available separately.`), formActions('Remove account link'));
     wireForm(form, async () => {
-      await api(`/api/admin/pms/links/${recordId(link.subject)}`, 'DELETE', {});
+      await api(`/api/admin/${app}/links/${recordId(link.subject)}`, 'DELETE', {});
       closeDialog(); notify('Account link removed.'); await loadMappings();
     });
-    openDialog('Remove this account link?', `${user ? userName(user) : 'IAM ID ' + link.subject} → PMS ID ${link.pmsUserId}`, form);
+    openDialog('Remove this account link?', `${user ? userName(user) : 'IAM ID ' + link.subject} → ${label} ID ${link[app+'UserId']}`, form);
   }
   async function loadMappings() {
-    $('#mapping-form').replaceChildren(element('p', { class: 'loading', role: 'status' }, 'Loading PMS accounts and identity links…'));
+    const version = ++mappingVersion;
+    const app = state.mappingApp;
+    const label = app.toUpperCase();
+    $('#mapping-form').replaceChildren(element('p', { class: 'loading', role: 'status' }, `Loading ${label} accounts and identity links…`));
     $('#links-table').replaceChildren();
     try {
-      const [users, links] = await Promise.all([api('/api/admin/pms/users'), api('/api/admin/pms/links')]);
-      if (!Array.isArray(users) || !Array.isArray(links)) throw new Error('PMS returned an invalid account list.');
-      state.pmsUsers = users; state.links = links; renderMappings();
-    } catch (error) { $('#mapping-form').replaceChildren(element('p', { class: 'form-error', role: 'alert' }, error.message)); }
+      const [users, links] = await Promise.all([api(`/api/admin/${app}/users`), api(`/api/admin/${app}/links`)]);
+      if(version!==mappingVersion) return;
+      if (!Array.isArray(users) || !Array.isArray(links)) throw new Error(`${label} returned an invalid account list.`);
+      state.appUsers = users; state.links = links; renderMappings();
+    } catch (error) { if(version===mappingVersion) $('#mapping-form').replaceChildren(element('p', { class: 'form-error', role: 'alert' }, error.message)); }
   }
+
   async function selectTab(name, focus = false) {
     state.tab = name;
     for (const tab of document.querySelectorAll('[data-tab]')) {
@@ -309,6 +319,7 @@
     const index = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : (current + (['ArrowRight', 'ArrowDown'].includes(event.key) ? 1 : tabs.length - 1)) % tabs.length;
     if (state.session?.isAdmin) selectTab(tabs[index].dataset.tab, true);
   });
+  $('#mapping-system').addEventListener('change', event => { state.mappingApp = event.target.value === 'crm' ? 'crm' : 'pms'; loadMappings(); });
   $('#user-search').addEventListener('input', event => { state.filter = event.target.value; renderUsers(); });
   dialog.addEventListener('close', () => { ++dialogVersion; if (returnFocus?.isConnected) returnFocus.focus(); else document.querySelector(`[data-tab="${state.tab}"]`)?.focus(); });
   dialog.addEventListener('click', event => {

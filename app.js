@@ -182,7 +182,7 @@
     openDialog(`
       <div class="profile-detail"><span class="avatar" aria-hidden="true">${escapeHtml(user.fullName?.slice(0,1)||'?')}</span><div><h2 id="dialog-title">${escapeHtml(user.fullName)}</h2><p>${escapeHtml(user.email)}</p></div></div>
       <p class="dialog-copy">${portalSession.isAdmin?'Workspace administrator':'KIM Communication account'}</p>
-      <div class="preview-notice">Signing out here also ends your connected PMS sessions.</div>
+      <div class="preview-notice">Signing out here also ends your connected workspace sessions.</div>
       <p id="logout-error" class="dialog-copy" role="alert" hidden></p>
       <div class="dialog-actions"><button class="primary-button" type="button" data-action="logout" data-autofocus>Sign out all workspaces</button><button class="secondary-button" type="button" data-action="close-dialog">Back</button></div>
     `, trigger);

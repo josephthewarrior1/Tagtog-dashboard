@@ -9,7 +9,8 @@ Portal workspace KIM Communication untuk mengakses EMS, PMS, dan CRM melalui sat
 - Halaman awal mengharuskan login. Login dan logout sudah dicoba dengan EMS-IAM pada lingkungan lokal terisolasi.
 - Portal menampilkan aplikasi berdasarkan hak akses dari IAM dan menyediakan halaman admin untuk user, role, dan pemetaan akun PMS.
 - Integrasi SSO PMS masih berupa prototipe lintas repositori. Pengujian menyeluruh portal → PMS belum selesai; source IAM dan PMS tidak disertakan di repo ini.
-- Integrasi EMS dan CRM belum diaktifkan.
+- Prototipe login CRM tersedia di branch lokal terpisah: client CRM independen, mapping user lama, cookie sesi HttpOnly, dan pemeriksaan izin di backend. Lihat [panduan CRM lokal](CRM-LOCAL.md). Source CRM berada di worktree repo masing-masing, bukan di dalam commit portal.
+- Integrasi portal ke EMS belum diaktifkan; EMS sendiri sudah memakai EMS-IAM.
 - Schema akun personal/perusahaan, paket, dan masa aktif masih **rancangan**, belum diimplementasikan. Lihat [rancangan schema dan ERD](docs/SCHEMA-PUSAT-DAN-ERD.md).
 - Kode ini untuk pengembangan lokal. Belum ada deployment produksi.
 
