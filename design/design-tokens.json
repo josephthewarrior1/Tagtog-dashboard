@@ -1,0 +1,55 @@
+{
+  "name": "TAGTOG Portal v2",
+  "version": 2,
+  "colors": {
+    "canvas": "#F6F7FB",
+    "surface": "#FFFFFF",
+    "sidebar": "#151C2D",
+    "ink": "#1B2438",
+    "secondary": "#64738B",
+    "line": "#E4E9F2",
+    "navMuted": "#A9B3C8",
+    "navActive": "#2B3D63",
+    "blue": "#496AF4",
+    "blueTint": "#E9F2FF",
+    "purple": "#765CE3",
+    "purpleTint": "#F1EDFC",
+    "green": "#2B8F74",
+    "greenTint": "#EAF5EF"
+  },
+  "typography": {
+    "displayFamily": "Bahnschrift",
+    "bodyFamily": "Segoe UI",
+    "desktopHeadline": 50,
+    "mobileHeadline": 32,
+    "appTitle": 28,
+    "appFullName": 13,
+    "bodySize": 14,
+    "features": 12
+  },
+  "layout": {
+    "desktop": {
+      "width": 1440,
+      "height": 960,
+      "sidebar": 232,
+      "mainPadding": 44,
+      "cardWidth": 357.3333333333333,
+      "cardHeight": 340,
+      "cardGap": 24
+    },
+    "mobile": {
+      "width": 390,
+      "height": 1530,
+      "cardWidth": 350,
+      "cardHeight": 340,
+      "cardGap": 18
+    }
+  },
+  "radii": {
+    "card": 19,
+    "headerMotif": 13,
+    "search": 12,
+    "action": 22
+  },
+  "scope": "Application launcher only. No task, activity, schedule, or quick-link widgets."
+}

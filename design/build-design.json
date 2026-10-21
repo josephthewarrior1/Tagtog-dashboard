@@ -1,0 +1,3603 @@
+[
+  {
+    "command": "file.new",
+    "params": {
+      "name": "TAGTOG Portal v2"
+    }
+  },
+  {
+    "command": "page.rename",
+    "params": {
+      "name": "TAGTOG · Connected workspaces v2"
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "frame",
+      "name": "Portal desktop v2",
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 960,
+      "props": {
+        "fill": "#F6F7FB",
+        "cornerRadius": 0,
+        "clip": true
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "rectangle",
+      "name": "Dark sidebar",
+      "x": 0,
+      "y": 0,
+      "width": 232,
+      "height": 960,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fill": "#151C2D",
+        "cornerRadius": 0,
+        "rotation": 0
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "rectangle",
+      "name": "TAGTOG mark tall",
+      "x": 28,
+      "y": 50,
+      "width": 14,
+      "height": 32,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fill": "#496AF4",
+        "cornerRadius": 4,
+        "rotation": 0
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "rectangle",
+      "name": "TAGTOG mark upper",
+      "x": 47,
+      "y": 50,
+      "width": 13,
+      "height": 14,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fill": "#8CA4FF",
+        "cornerRadius": 4,
+        "rotation": 0
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "rectangle",
+      "name": "TAGTOG mark lower",
+      "x": 47,
+      "y": 69,
+      "width": 13,
+      "height": 13,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fill": "#496AF4",
+        "cornerRadius": 4,
+        "rotation": 0
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "TAGTOG wordmark",
+      "text": "TAGTOG",
+      "x": 75,
+      "y": 48,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Bold",
+        "fontSize": 24,
+        "lineHeight": 34,
+        "fill": "#FFFFFF",
+        "letterSpacing": -0.5,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "KIM endorsement",
+      "text": "by KIM Communication",
+      "x": 28,
+      "y": 94,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Regular",
+        "fontSize": 11,
+        "lineHeight": 15,
+        "fill": "#A9B3C8",
+        "letterSpacing": 0,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "Navigation label",
+      "text": "WORKSPACE",
+      "x": 30,
+      "y": 142,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Semibold",
+        "fontSize": 10,
+        "lineHeight": 14,
+        "fill": "#7F8BA7",
+        "letterSpacing": 1.5,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "rectangle",
+      "name": "Home selected surface",
+      "x": 16,
+      "y": 164,
+      "width": 200,
+      "height": 52,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fill": "#2B3D63",
+        "cornerRadius": 12,
+        "rotation": 0
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "vector",
+      "name": "home icon",
+      "path": "M3 10 L12 3 L21 10 M5 9 L5 21 L10 21 L10 14 L14 14 L14 21 L19 21 L19 9",
+      "x": 32,
+      "y": 176,
+      "width": 21,
+      "height": 21,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fills": [],
+        "stroke": "#91ABFF",
+        "strokeWeight": 1.8,
+        "strokeCap": "round",
+        "strokeJoin": "round"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "Home navigation",
+      "text": "Home",
+      "x": 72,
+      "y": 173,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Semibold",
+        "fontSize": 14,
+        "lineHeight": 20,
+        "fill": "#FFFFFF",
+        "letterSpacing": 0,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "vector",
+      "name": "ems icon",
+      "path": "M5 5 L19 5 L19 21 L5 21 Z M8 3 L8 7 M16 3 L16 7 M5 10 L19 10 M9 14 L15 14 L15 17 L9 17 Z",
+      "x": 32,
+      "y": 251,
+      "width": 21,
+      "height": 21,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fills": [],
+        "stroke": "#A9B3C8",
+        "strokeWeight": 1.8,
+        "strokeCap": "round",
+        "strokeJoin": "round"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "EMS navigation",
+      "text": "EMS",
+      "x": 72,
+      "y": 248,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Semibold",
+        "fontSize": 14,
+        "lineHeight": 20,
+        "fill": "#E1E6F0",
+        "letterSpacing": 0,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "EMS subtitle",
+      "text": "Event Management",
+      "x": 72,
+      "y": 273,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Regular",
+        "fontSize": 11,
+        "lineHeight": 15,
+        "fill": "#A9B3C8",
+        "letterSpacing": 0,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "vector",
+      "name": "pms icon",
+      "path": "M12 3 L22 8 L12 13 L2 8 Z M2 12 L12 17 L22 12 M2 16 L12 21 L22 16",
+      "x": 32,
+      "y": 321,
+      "width": 21,
+      "height": 21,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fills": [],
+        "stroke": "#A9B3C8",
+        "strokeWeight": 1.8,
+        "strokeCap": "round",
+        "strokeJoin": "round"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "PMS navigation",
+      "text": "PMS",
+      "x": 72,
+      "y": 318,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Semibold",
+        "fontSize": 14,
+        "lineHeight": 20,
+        "fill": "#E1E6F0",
+        "letterSpacing": 0,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "PMS subtitle",
+      "text": "Project Management",
+      "x": 72,
+      "y": 343,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Regular",
+        "fontSize": 11,
+        "lineHeight": 15,
+        "fill": "#A9B3C8",
+        "letterSpacing": 0,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "vector",
+      "name": "crm icon",
+      "path": "M12 7 A3 3 0 1 1 6 7 A3 3 0 1 1 12 7 M3 21 L3 19 A6 6 0 0 1 15 19 L15 21 M16 4 A3 3 0 0 1 16 10 M18 14 A6 6 0 0 1 21 19 L21 21",
+      "x": 32,
+      "y": 391,
+      "width": 21,
+      "height": 21,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fills": [],
+        "stroke": "#A9B3C8",
+        "strokeWeight": 1.8,
+        "strokeCap": "round",
+        "strokeJoin": "round"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "CRM navigation",
+      "text": "CRM",
+      "x": 72,
+      "y": 388,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Semibold",
+        "fontSize": 14,
+        "lineHeight": 20,
+        "fill": "#E1E6F0",
+        "letterSpacing": 0,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "CRM subtitle",
+      "text": "Customer Relationship",
+      "x": 72,
+      "y": 413,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Regular",
+        "fontSize": 11,
+        "lineHeight": 15,
+        "fill": "#A9B3C8",
+        "letterSpacing": 0,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "rectangle",
+      "name": "Sidebar guide divider",
+      "x": 28,
+      "y": 800,
+      "width": 176,
+      "height": 1,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fill": "#30394D",
+        "cornerRadius": 0,
+        "rotation": 0
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "vector",
+      "name": "guide icon",
+      "path": "M12 5 C8 3 5 3 2 4 L2 20 C6 19 9 19 12 21 C15 19 18 19 22 20 L22 4 C19 3 16 3 12 5 Z M12 5 L12 21",
+      "x": 30,
+      "y": 825,
+      "width": 20,
+      "height": 20,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fills": [],
+        "stroke": "#A9B3C8",
+        "strokeWeight": 1.8,
+        "strokeCap": "round",
+        "strokeJoin": "round"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "Portal guide",
+      "text": "Portal guide",
+      "x": 65,
+      "y": 824,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Semibold",
+        "fontSize": 13,
+        "lineHeight": 18,
+        "fill": "#E4E9F4",
+        "letterSpacing": 0,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "Portal guide hint",
+      "text": "A simple place to start.",
+      "x": 30,
+      "y": 863,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Regular",
+        "fontSize": 12,
+        "lineHeight": 17,
+        "fill": "#A9B3C8",
+        "letterSpacing": 0,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "Sidebar footer",
+      "text": "KIM Communication",
+      "x": 30,
+      "y": 914,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Regular",
+        "fontSize": 11,
+        "lineHeight": 15,
+        "fill": "#8E9BB5",
+        "letterSpacing": 0,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "rectangle",
+      "name": "Topbar surface",
+      "x": 232,
+      "y": 0,
+      "width": 1208,
+      "height": 96,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fill": "#FEFEFF",
+        "cornerRadius": 0,
+        "rotation": 0
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "rectangle",
+      "name": "Topbar divider",
+      "x": 232,
+      "y": 95,
+      "width": 1208,
+      "height": 1,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fill": "#E4E9F2",
+        "cornerRadius": 0,
+        "rotation": 0
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "Workspace breadcrumb",
+      "text": "Workspace",
+      "x": 276,
+      "y": 37,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Regular",
+        "fontSize": 14,
+        "lineHeight": 20,
+        "fill": "#7B879C",
+        "letterSpacing": 0,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "Breadcrumb separator",
+      "text": "/",
+      "x": 361,
+      "y": 37,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Regular",
+        "fontSize": 14,
+        "lineHeight": 20,
+        "fill": "#BCC5D3",
+        "letterSpacing": 0,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "Home breadcrumb",
+      "text": "Home",
+      "x": 381,
+      "y": 37,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Semibold",
+        "fontSize": 14,
+        "lineHeight": 20,
+        "fill": "#1B2438",
+        "letterSpacing": 0,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "rectangle",
+      "name": "Application search",
+      "x": 946,
+      "y": 26,
+      "width": 350,
+      "height": 44,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fill": "#F7F8FC",
+        "cornerRadius": 12,
+        "rotation": 0,
+        "stroke": "#E4E9F2",
+        "strokeWeight": 1
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "vector",
+      "name": "search icon",
+      "path": "M17 10 A7 7 0 1 1 3 10 A7 7 0 1 1 17 10 M15 15 L22 22",
+      "x": 961,
+      "y": 40,
+      "width": 17,
+      "height": 17,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fills": [],
+        "stroke": "#7B879C",
+        "strokeWeight": 1.8,
+        "strokeCap": "round",
+        "strokeJoin": "round"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "Search placeholder",
+      "text": "Search applications...",
+      "x": 989,
+      "y": 38,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Regular",
+        "fontSize": 13,
+        "lineHeight": 18,
+        "fill": "#7B879C",
+        "letterSpacing": 0,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "rectangle",
+      "name": "Keyboard shortcut surface",
+      "x": 1237,
+      "y": 37,
+      "width": 45,
+      "height": 23,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fill": "#FFFFFF",
+        "cornerRadius": 5,
+        "rotation": 0,
+        "stroke": "#E4E9F2",
+        "strokeWeight": 1
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "Keyboard shortcut",
+      "text": "Ctrl K",
+      "x": 1243,
+      "y": 40,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Regular",
+        "fontSize": 10,
+        "lineHeight": 14,
+        "fill": "#7D899C",
+        "letterSpacing": 0,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "ellipse",
+      "name": "Jo sample avatar",
+      "x": 1348,
+      "y": 26,
+      "width": 44,
+      "height": 44,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fill": "#E8EDFB"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "Jo avatar initial",
+      "text": "J",
+      "x": 1363,
+      "y": 35,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Semibold",
+        "fontSize": 17,
+        "lineHeight": 24,
+        "fill": "#496AF4",
+        "letterSpacing": 0,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "Welcome eyebrow",
+      "text": "WELCOME BACK, JO",
+      "x": 276,
+      "y": 139,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Semibold",
+        "fontSize": 11,
+        "lineHeight": 15,
+        "fill": "#78869E",
+        "letterSpacing": 1.7,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "Welcome headline",
+      "text": "Your next move\nstarts here.",
+      "x": 273,
+      "y": 168,
+      "parent": {
+        "$step": 2
+      },
+      "width": 670,
+      "props": {
+        "fontFamily": "Bahnschrift",
+        "fontStyle": "Regular",
+        "fontSize": 50,
+        "lineHeight": 59,
+        "fill": "#1B2438",
+        "letterSpacing": -1.8,
+        "textAutoResize": "height",
+        "fontVariations": {
+          "wght": 600
+        }
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "Welcome subtitle",
+      "text": "Events, projects, and relationships. Choose where to begin.",
+      "x": 276,
+      "y": 309,
+      "parent": {
+        "$step": 2
+      },
+      "width": 665,
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Regular",
+        "fontSize": 15,
+        "lineHeight": 23,
+        "fill": "#64738B",
+        "letterSpacing": 0,
+        "textAutoResize": "height"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "ellipse",
+      "name": "Welcome soft oval",
+      "x": 1059,
+      "y": 155,
+      "width": 288,
+      "height": 178,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fill": "#EAF0FD"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "ellipse",
+      "name": "Welcome soft circle",
+      "x": 1314,
+      "y": 163,
+      "width": 39,
+      "height": 39,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fill": "#EDF0F8"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "vector",
+      "name": "Tile connection",
+      "path": "M0 58 L88 58 L122 23 L197 23",
+      "x": 1009,
+      "y": 208,
+      "width": 197,
+      "height": 58,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fills": [],
+        "stroke": "#D1DCF5",
+        "strokeWeight": 2,
+        "strokeCap": "round",
+        "strokeJoin": "round"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "ellipse",
+      "name": "Connection point one",
+      "x": 1005,
+      "y": 261,
+      "width": 8,
+      "height": 8,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fill": "#BDCDF1"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "ellipse",
+      "name": "Connection point two",
+      "x": 1308,
+      "y": 309,
+      "width": 7,
+      "height": 7,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fill": "#B5C8F1"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "rectangle",
+      "name": "Layered purple tile",
+      "x": 1080,
+      "y": 160,
+      "width": 95,
+      "height": 95,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fill": "#F1EDFC",
+        "cornerRadius": 23,
+        "rotation": -12,
+        "stroke": "#E1D8F7",
+        "strokeWeight": 1
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "vector",
+      "name": "pms icon",
+      "path": "M12 3 L22 8 L12 13 L2 8 Z M2 12 L12 17 L22 12 M2 16 L12 21 L22 16",
+      "x": 1107,
+      "y": 186,
+      "width": 42,
+      "height": 42,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fills": [],
+        "stroke": "#765CE3",
+        "strokeWeight": 2,
+        "strokeCap": "round",
+        "strokeJoin": "round"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "rectangle",
+      "name": "Layered green tile",
+      "x": 1230,
+      "y": 207,
+      "width": 94,
+      "height": 94,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fill": "#EAF5EF",
+        "cornerRadius": 23,
+        "rotation": 11,
+        "stroke": "#D6E9DD",
+        "strokeWeight": 1
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "vector",
+      "name": "crm icon",
+      "path": "M12 7 A3 3 0 1 1 6 7 A3 3 0 1 1 12 7 M3 21 L3 19 A6 6 0 0 1 15 19 L15 21 M16 4 A3 3 0 0 1 16 10 M18 14 A6 6 0 0 1 21 19 L21 21",
+      "x": 1254,
+      "y": 230,
+      "width": 43,
+      "height": 43,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fills": [],
+        "stroke": "#2B8F74",
+        "strokeWeight": 2,
+        "strokeCap": "round",
+        "strokeJoin": "round"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "rectangle",
+      "name": "Layered front tile",
+      "x": 1154,
+      "y": 213,
+      "width": 104,
+      "height": 104,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fill": "#FFFFFF",
+        "cornerRadius": 25,
+        "rotation": -3,
+        "stroke": "#DCE5F5",
+        "strokeWeight": 1
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "vector",
+      "name": "ems icon",
+      "path": "M5 5 L19 5 L19 21 L5 21 Z M8 3 L8 7 M16 3 L16 7 M5 10 L19 10 M9 14 L15 14 L15 17 L9 17 Z",
+      "x": 1183,
+      "y": 242,
+      "width": 45,
+      "height": 45,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fills": [],
+        "stroke": "#496AF4",
+        "strokeWeight": 2,
+        "strokeCap": "round",
+        "strokeJoin": "round"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "Date under illustration",
+      "text": "WEDNESDAY, 21 OCTOBER  ·  09:41 WIB",
+      "x": 1077,
+      "y": 351,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Regular",
+        "fontSize": 10,
+        "lineHeight": 14,
+        "fill": "#8290A7",
+        "letterSpacing": 0.25,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "Applications heading",
+      "text": "Your applications",
+      "x": 276,
+      "y": 404,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Semibold",
+        "fontSize": 22,
+        "lineHeight": 31,
+        "fill": "#1B2438",
+        "letterSpacing": -0.4,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "Application count",
+      "text": "3 workspaces",
+      "x": 1309,
+      "y": 412,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Regular",
+        "fontSize": 12,
+        "lineHeight": 17,
+        "fill": "#7F8BA1",
+        "letterSpacing": 0,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "frame",
+      "name": "EMS application card",
+      "x": 276,
+      "y": 456,
+      "width": 357.3333333333333,
+      "height": 340,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fill": "#FFFFFF",
+        "cornerRadius": 19,
+        "clip": true
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "rectangle",
+      "name": "EMS card border",
+      "x": 0,
+      "y": 0,
+      "width": 357.3333333333333,
+      "height": 340,
+      "parent": {
+        "$step": 56
+      },
+      "props": {
+        "fill": "#FFFFFF",
+        "cornerRadius": 19,
+        "rotation": 0,
+        "stroke": "#E4E9F2",
+        "strokeWeight": 1
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "rectangle",
+      "name": "EMS visual header",
+      "x": 0,
+      "y": 0,
+      "width": 357.3333333333333,
+      "height": 116,
+      "parent": {
+        "$step": 56
+      },
+      "props": {
+        "fill": "#E9F2FF",
+        "cornerRadius": [
+          19,
+          19,
+          0,
+          0
+        ],
+        "rotation": 0
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "vector",
+      "name": "ems icon",
+      "path": "M5 5 L19 5 L19 21 L5 21 Z M8 3 L8 7 M16 3 L16 7 M5 10 L19 10 M9 14 L15 14 L15 17 L9 17 Z",
+      "x": 28,
+      "y": 32,
+      "width": 46,
+      "height": 46,
+      "parent": {
+        "$step": 56
+      },
+      "props": {
+        "fills": [],
+        "stroke": "#496AF4",
+        "strokeWeight": 2.1,
+        "strokeCap": "round",
+        "strokeJoin": "round"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "EMS category label",
+      "text": "Events",
+      "x": 97,
+      "y": 47,
+      "parent": {
+        "$step": 56
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Semibold",
+        "fontSize": 12,
+        "lineHeight": 17,
+        "fill": "#496AF4",
+        "letterSpacing": 0,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "rectangle",
+      "name": "EMS header motif back",
+      "x": 245.33333333333331,
+      "y": 24,
+      "width": 61,
+      "height": 61,
+      "parent": {
+        "$step": 56
+      },
+      "props": {
+        "fill": "#E9F2FF",
+        "cornerRadius": 13,
+        "rotation": 20,
+        "stroke": "#C8D8FC",
+        "strokeWeight": 1
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "rectangle",
+      "name": "EMS header motif front",
+      "x": 266.3333333333333,
+      "y": 43,
+      "width": 45,
+      "height": 45,
+      "parent": {
+        "$step": 56
+      },
+      "props": {
+        "fill": "#E9F2FF",
+        "cornerRadius": 11,
+        "rotation": 20,
+        "stroke": "#C8D8FC",
+        "strokeWeight": 1
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "ellipse",
+      "name": "EMS header motif dot",
+      "x": 211.33333333333331,
+      "y": 42,
+      "width": 7,
+      "height": 7,
+      "parent": {
+        "$step": 56
+      },
+      "props": {
+        "fill": "#C8D8FC"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "EMS title",
+      "text": "EMS",
+      "x": 24,
+      "y": 132,
+      "parent": {
+        "$step": 56
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Semibold",
+        "fontSize": 28,
+        "lineHeight": 39,
+        "fill": "#1B2438",
+        "letterSpacing": -0.5,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "EMS full name",
+      "text": "Event Management System",
+      "x": 24,
+      "y": 173,
+      "parent": {
+        "$step": 56
+      },
+      "width": 309.3333333333333,
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Regular",
+        "fontSize": 13,
+        "lineHeight": 19,
+        "fill": "#64738B",
+        "letterSpacing": 0,
+        "textAutoResize": "height"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "EMS description",
+      "text": "Plan, organize, and deliver\nmeaningful events.",
+      "x": 24,
+      "y": 207,
+      "parent": {
+        "$step": 56
+      },
+      "width": 309.3333333333333,
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Regular",
+        "fontSize": 14,
+        "lineHeight": 20,
+        "fill": "#64738B",
+        "letterSpacing": 0,
+        "textAutoResize": "height"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "EMS static features",
+      "text": "Events  ·  Participants  ·  Reports",
+      "x": 24,
+      "y": 257,
+      "parent": {
+        "$step": 56
+      },
+      "width": 309.3333333333333,
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Regular",
+        "fontSize": 12,
+        "lineHeight": 17,
+        "fill": "#64738B",
+        "letterSpacing": 0,
+        "textAutoResize": "height"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "Open EMS",
+      "text": "Open EMS",
+      "x": 24,
+      "y": 292,
+      "parent": {
+        "$step": 56
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Semibold",
+        "fontSize": 14,
+        "lineHeight": 20,
+        "fill": "#1B2438",
+        "letterSpacing": 0,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "ellipse",
+      "name": "EMS circular action",
+      "x": 289.3333333333333,
+      "y": 282,
+      "width": 44,
+      "height": 44,
+      "parent": {
+        "$step": 56
+      },
+      "props": {
+        "fill": "#496AF4"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "vector",
+      "name": "arrow icon",
+      "path": "M4 12 L20 12 M14 6 L20 12 L14 18",
+      "x": 301.3333333333333,
+      "y": 294,
+      "width": 20,
+      "height": 20,
+      "parent": {
+        "$step": 56
+      },
+      "props": {
+        "fills": [],
+        "stroke": "#FFFFFF",
+        "strokeWeight": 1.8,
+        "strokeCap": "round",
+        "strokeJoin": "round"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "frame",
+      "name": "PMS application card",
+      "x": 657.3333333333333,
+      "y": 456,
+      "width": 357.3333333333333,
+      "height": 340,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fill": "#FFFFFF",
+        "cornerRadius": 19,
+        "clip": true
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "rectangle",
+      "name": "PMS card border",
+      "x": 0,
+      "y": 0,
+      "width": 357.3333333333333,
+      "height": 340,
+      "parent": {
+        "$step": 71
+      },
+      "props": {
+        "fill": "#FFFFFF",
+        "cornerRadius": 19,
+        "rotation": 0,
+        "stroke": "#E4E9F2",
+        "strokeWeight": 1
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "rectangle",
+      "name": "PMS visual header",
+      "x": 0,
+      "y": 0,
+      "width": 357.3333333333333,
+      "height": 116,
+      "parent": {
+        "$step": 71
+      },
+      "props": {
+        "fill": "#F1EDFC",
+        "cornerRadius": [
+          19,
+          19,
+          0,
+          0
+        ],
+        "rotation": 0
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "vector",
+      "name": "pms icon",
+      "path": "M12 3 L22 8 L12 13 L2 8 Z M2 12 L12 17 L22 12 M2 16 L12 21 L22 16",
+      "x": 28,
+      "y": 32,
+      "width": 46,
+      "height": 46,
+      "parent": {
+        "$step": 71
+      },
+      "props": {
+        "fills": [],
+        "stroke": "#765CE3",
+        "strokeWeight": 2.1,
+        "strokeCap": "round",
+        "strokeJoin": "round"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "PMS category label",
+      "text": "Projects",
+      "x": 97,
+      "y": 47,
+      "parent": {
+        "$step": 71
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Semibold",
+        "fontSize": 12,
+        "lineHeight": 17,
+        "fill": "#765CE3",
+        "letterSpacing": 0,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "rectangle",
+      "name": "PMS header motif back",
+      "x": 245.33333333333331,
+      "y": 24,
+      "width": 61,
+      "height": 61,
+      "parent": {
+        "$step": 71
+      },
+      "props": {
+        "fill": "#F1EDFC",
+        "cornerRadius": 13,
+        "rotation": 20,
+        "stroke": "#D9CFF6",
+        "strokeWeight": 1
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "rectangle",
+      "name": "PMS header motif front",
+      "x": 266.3333333333333,
+      "y": 43,
+      "width": 45,
+      "height": 45,
+      "parent": {
+        "$step": 71
+      },
+      "props": {
+        "fill": "#F1EDFC",
+        "cornerRadius": 11,
+        "rotation": 20,
+        "stroke": "#D9CFF6",
+        "strokeWeight": 1
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "ellipse",
+      "name": "PMS header motif dot",
+      "x": 211.33333333333331,
+      "y": 42,
+      "width": 7,
+      "height": 7,
+      "parent": {
+        "$step": 71
+      },
+      "props": {
+        "fill": "#D9CFF6"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "PMS title",
+      "text": "PMS",
+      "x": 24,
+      "y": 132,
+      "parent": {
+        "$step": 71
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Semibold",
+        "fontSize": 28,
+        "lineHeight": 39,
+        "fill": "#1B2438",
+        "letterSpacing": -0.5,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "PMS full name",
+      "text": "Project Management System",
+      "x": 24,
+      "y": 173,
+      "parent": {
+        "$step": 71
+      },
+      "width": 309.3333333333333,
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Regular",
+        "fontSize": 13,
+        "lineHeight": 19,
+        "fill": "#64738B",
+        "letterSpacing": 0,
+        "textAutoResize": "height"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "PMS description",
+      "text": "Turn ideas into real progress\nwith your team.",
+      "x": 24,
+      "y": 207,
+      "parent": {
+        "$step": 71
+      },
+      "width": 309.3333333333333,
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Regular",
+        "fontSize": 14,
+        "lineHeight": 20,
+        "fill": "#64738B",
+        "letterSpacing": 0,
+        "textAutoResize": "height"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "PMS static features",
+      "text": "Tasks  ·  Timeline  ·  Collaboration",
+      "x": 24,
+      "y": 257,
+      "parent": {
+        "$step": 71
+      },
+      "width": 309.3333333333333,
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Regular",
+        "fontSize": 12,
+        "lineHeight": 17,
+        "fill": "#64738B",
+        "letterSpacing": 0,
+        "textAutoResize": "height"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "Open PMS",
+      "text": "Open PMS",
+      "x": 24,
+      "y": 292,
+      "parent": {
+        "$step": 71
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Semibold",
+        "fontSize": 14,
+        "lineHeight": 20,
+        "fill": "#1B2438",
+        "letterSpacing": 0,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "ellipse",
+      "name": "PMS circular action",
+      "x": 289.3333333333333,
+      "y": 282,
+      "width": 44,
+      "height": 44,
+      "parent": {
+        "$step": 71
+      },
+      "props": {
+        "fill": "#765CE3"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "vector",
+      "name": "arrow icon",
+      "path": "M4 12 L20 12 M14 6 L20 12 L14 18",
+      "x": 301.3333333333333,
+      "y": 294,
+      "width": 20,
+      "height": 20,
+      "parent": {
+        "$step": 71
+      },
+      "props": {
+        "fills": [],
+        "stroke": "#FFFFFF",
+        "strokeWeight": 1.8,
+        "strokeCap": "round",
+        "strokeJoin": "round"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "frame",
+      "name": "CRM application card",
+      "x": 1038.6666666666665,
+      "y": 456,
+      "width": 357.3333333333333,
+      "height": 340,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fill": "#FFFFFF",
+        "cornerRadius": 19,
+        "clip": true
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "rectangle",
+      "name": "CRM card border",
+      "x": 0,
+      "y": 0,
+      "width": 357.3333333333333,
+      "height": 340,
+      "parent": {
+        "$step": 86
+      },
+      "props": {
+        "fill": "#FFFFFF",
+        "cornerRadius": 19,
+        "rotation": 0,
+        "stroke": "#E4E9F2",
+        "strokeWeight": 1
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "rectangle",
+      "name": "CRM visual header",
+      "x": 0,
+      "y": 0,
+      "width": 357.3333333333333,
+      "height": 116,
+      "parent": {
+        "$step": 86
+      },
+      "props": {
+        "fill": "#EAF5EF",
+        "cornerRadius": [
+          19,
+          19,
+          0,
+          0
+        ],
+        "rotation": 0
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "vector",
+      "name": "crm icon",
+      "path": "M12 7 A3 3 0 1 1 6 7 A3 3 0 1 1 12 7 M3 21 L3 19 A6 6 0 0 1 15 19 L15 21 M16 4 A3 3 0 0 1 16 10 M18 14 A6 6 0 0 1 21 19 L21 21",
+      "x": 28,
+      "y": 32,
+      "width": 46,
+      "height": 46,
+      "parent": {
+        "$step": 86
+      },
+      "props": {
+        "fills": [],
+        "stroke": "#2B8F74",
+        "strokeWeight": 2.1,
+        "strokeCap": "round",
+        "strokeJoin": "round"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "CRM category label",
+      "text": "Relationships",
+      "x": 97,
+      "y": 47,
+      "parent": {
+        "$step": 86
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Semibold",
+        "fontSize": 12,
+        "lineHeight": 17,
+        "fill": "#2B8F74",
+        "letterSpacing": 0,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "rectangle",
+      "name": "CRM header motif back",
+      "x": 245.33333333333331,
+      "y": 24,
+      "width": 61,
+      "height": 61,
+      "parent": {
+        "$step": 86
+      },
+      "props": {
+        "fill": "#EAF5EF",
+        "cornerRadius": 13,
+        "rotation": 20,
+        "stroke": "#C7E3D7",
+        "strokeWeight": 1
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "rectangle",
+      "name": "CRM header motif front",
+      "x": 266.3333333333333,
+      "y": 43,
+      "width": 45,
+      "height": 45,
+      "parent": {
+        "$step": 86
+      },
+      "props": {
+        "fill": "#EAF5EF",
+        "cornerRadius": 11,
+        "rotation": 20,
+        "stroke": "#C7E3D7",
+        "strokeWeight": 1
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "ellipse",
+      "name": "CRM header motif dot",
+      "x": 211.33333333333331,
+      "y": 42,
+      "width": 7,
+      "height": 7,
+      "parent": {
+        "$step": 86
+      },
+      "props": {
+        "fill": "#C7E3D7"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "CRM title",
+      "text": "CRM",
+      "x": 24,
+      "y": 132,
+      "parent": {
+        "$step": 86
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Semibold",
+        "fontSize": 28,
+        "lineHeight": 39,
+        "fill": "#1B2438",
+        "letterSpacing": -0.5,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "CRM full name",
+      "text": "Customer Relationship Management",
+      "x": 24,
+      "y": 173,
+      "parent": {
+        "$step": 86
+      },
+      "width": 309.3333333333333,
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Regular",
+        "fontSize": 13,
+        "lineHeight": 19,
+        "fill": "#64738B",
+        "letterSpacing": 0,
+        "textAutoResize": "height"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "CRM description",
+      "text": "Build stronger relationships\nand grow together.",
+      "x": 24,
+      "y": 207,
+      "parent": {
+        "$step": 86
+      },
+      "width": 309.3333333333333,
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Regular",
+        "fontSize": 14,
+        "lineHeight": 20,
+        "fill": "#64738B",
+        "letterSpacing": 0,
+        "textAutoResize": "height"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "CRM static features",
+      "text": "Contacts  ·  Companies  ·  Activities",
+      "x": 24,
+      "y": 257,
+      "parent": {
+        "$step": 86
+      },
+      "width": 309.3333333333333,
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Regular",
+        "fontSize": 12,
+        "lineHeight": 17,
+        "fill": "#64738B",
+        "letterSpacing": 0,
+        "textAutoResize": "height"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "Open CRM",
+      "text": "Open CRM",
+      "x": 24,
+      "y": 292,
+      "parent": {
+        "$step": 86
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Semibold",
+        "fontSize": 14,
+        "lineHeight": 20,
+        "fill": "#1B2438",
+        "letterSpacing": 0,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "ellipse",
+      "name": "CRM circular action",
+      "x": 289.3333333333333,
+      "y": 282,
+      "width": 44,
+      "height": 44,
+      "parent": {
+        "$step": 86
+      },
+      "props": {
+        "fill": "#2B8F74"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "vector",
+      "name": "arrow icon",
+      "path": "M4 12 L20 12 M14 6 L20 12 L14 18",
+      "x": 301.3333333333333,
+      "y": 294,
+      "width": 20,
+      "height": 20,
+      "parent": {
+        "$step": 86
+      },
+      "props": {
+        "fills": [],
+        "stroke": "#FFFFFF",
+        "strokeWeight": 1.8,
+        "strokeCap": "round",
+        "strokeJoin": "round"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "Desktop footer KIM",
+      "text": "KIM Communication",
+      "x": 276,
+      "y": 850,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Regular",
+        "fontSize": 11,
+        "lineHeight": 15,
+        "fill": "#7E8BA1",
+        "letterSpacing": 0,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "Desktop footer TAGTOG",
+      "text": "TAGTOG",
+      "x": 1339,
+      "y": 850,
+      "parent": {
+        "$step": 2
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Semibold",
+        "fontSize": 11,
+        "lineHeight": 15,
+        "fill": "#7E8BA1",
+        "letterSpacing": 0.6,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "frame",
+      "name": "Portal mobile v2",
+      "x": 1520,
+      "y": 0,
+      "width": 390,
+      "height": 1530,
+      "props": {
+        "fill": "#F6F7FB",
+        "cornerRadius": 0,
+        "clip": true
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "rectangle",
+      "name": "Mobile topbar surface",
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 76,
+      "parent": {
+        "$step": 103
+      },
+      "props": {
+        "fill": "#FFFFFF",
+        "cornerRadius": 0,
+        "rotation": 0
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "rectangle",
+      "name": "Mobile topbar divider",
+      "x": 0,
+      "y": 75,
+      "width": 390,
+      "height": 1,
+      "parent": {
+        "$step": 103
+      },
+      "props": {
+        "fill": "#E4E9F2",
+        "cornerRadius": 0,
+        "rotation": 0
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "vector",
+      "name": "menu icon",
+      "path": "M0 0 L18 0 M0 7 L18 7 M0 14 L18 14",
+      "x": 21,
+      "y": 29,
+      "width": 20,
+      "height": 20,
+      "parent": {
+        "$step": 103
+      },
+      "props": {
+        "fills": [],
+        "stroke": "#1B2438",
+        "strokeWeight": 1.8,
+        "strokeCap": "round",
+        "strokeJoin": "round"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "rectangle",
+      "name": "TAGTOG mark tall",
+      "x": 62,
+      "y": 24,
+      "width": 10.92,
+      "height": 24.96,
+      "parent": {
+        "$step": 103
+      },
+      "props": {
+        "fill": "#496AF4",
+        "cornerRadius": 3.12,
+        "rotation": 0
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "rectangle",
+      "name": "TAGTOG mark upper",
+      "x": 76.82,
+      "y": 24,
+      "width": 10.14,
+      "height": 10.92,
+      "parent": {
+        "$step": 103
+      },
+      "props": {
+        "fill": "#8CA4FF",
+        "cornerRadius": 3.12,
+        "rotation": 0
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "rectangle",
+      "name": "TAGTOG mark lower",
+      "x": 76.82,
+      "y": 38.82,
+      "width": 10.14,
+      "height": 10.14,
+      "parent": {
+        "$step": 103
+      },
+      "props": {
+        "fill": "#496AF4",
+        "cornerRadius": 3.12,
+        "rotation": 0
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "Mobile TAGTOG",
+      "text": "TAGTOG",
+      "x": 99,
+      "y": 25,
+      "parent": {
+        "$step": 103
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Bold",
+        "fontSize": 18,
+        "lineHeight": 25,
+        "fill": "#1B2438",
+        "letterSpacing": -0.4,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "ellipse",
+      "name": "Mobile Jo avatar",
+      "x": 330,
+      "y": 18,
+      "width": 40,
+      "height": 40,
+      "parent": {
+        "$step": 103
+      },
+      "props": {
+        "fill": "#E8EDFB"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "Mobile Jo initial",
+      "text": "J",
+      "x": 344,
+      "y": 25,
+      "parent": {
+        "$step": 103
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Semibold",
+        "fontSize": 16,
+        "lineHeight": 22,
+        "fill": "#496AF4",
+        "letterSpacing": 0,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "rectangle",
+      "name": "Application search",
+      "x": 20,
+      "y": 95,
+      "width": 350,
+      "height": 44,
+      "parent": {
+        "$step": 103
+      },
+      "props": {
+        "fill": "#F7F8FC",
+        "cornerRadius": 12,
+        "rotation": 0,
+        "stroke": "#E4E9F2",
+        "strokeWeight": 1
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "vector",
+      "name": "search icon",
+      "path": "M17 10 A7 7 0 1 1 3 10 A7 7 0 1 1 17 10 M15 15 L22 22",
+      "x": 35,
+      "y": 109,
+      "width": 17,
+      "height": 17,
+      "parent": {
+        "$step": 103
+      },
+      "props": {
+        "fills": [],
+        "stroke": "#7B879C",
+        "strokeWeight": 1.8,
+        "strokeCap": "round",
+        "strokeJoin": "round"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "Search placeholder",
+      "text": "Search applications...",
+      "x": 63,
+      "y": 107,
+      "parent": {
+        "$step": 103
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Regular",
+        "fontSize": 13,
+        "lineHeight": 18,
+        "fill": "#7B879C",
+        "letterSpacing": 0,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "Mobile welcome eyebrow",
+      "text": "WELCOME BACK, JO",
+      "x": 20,
+      "y": 169,
+      "parent": {
+        "$step": 103
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Semibold",
+        "fontSize": 10,
+        "lineHeight": 14,
+        "fill": "#78869E",
+        "letterSpacing": 1.5,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "Mobile welcome headline",
+      "text": "Your next move\nstarts here.",
+      "x": 18,
+      "y": 195,
+      "parent": {
+        "$step": 103
+      },
+      "width": 352,
+      "props": {
+        "fontFamily": "Bahnschrift",
+        "fontStyle": "Regular",
+        "fontSize": 32,
+        "lineHeight": 40,
+        "fill": "#1B2438",
+        "letterSpacing": -1.1,
+        "textAutoResize": "height",
+        "fontVariations": {
+          "wght": 600
+        }
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "Mobile welcome subtitle",
+      "text": "Events, projects, and relationships.\nChoose where to begin.",
+      "x": 20,
+      "y": 291,
+      "parent": {
+        "$step": 103
+      },
+      "width": 350,
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Regular",
+        "fontSize": 14,
+        "lineHeight": 21,
+        "fill": "#64738B",
+        "letterSpacing": 0,
+        "textAutoResize": "height"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "Mobile application heading",
+      "text": "Your applications",
+      "x": 20,
+      "y": 358,
+      "parent": {
+        "$step": 103
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Semibold",
+        "fontSize": 20,
+        "lineHeight": 28,
+        "fill": "#1B2438",
+        "letterSpacing": -0.4,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "Mobile count",
+      "text": "3 workspaces",
+      "x": 291,
+      "y": 365,
+      "parent": {
+        "$step": 103
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Regular",
+        "fontSize": 11,
+        "lineHeight": 15,
+        "fill": "#7F8BA1",
+        "letterSpacing": 0,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "frame",
+      "name": "EMS application card",
+      "x": 20,
+      "y": 404,
+      "width": 350,
+      "height": 340,
+      "parent": {
+        "$step": 103
+      },
+      "props": {
+        "fill": "#FFFFFF",
+        "cornerRadius": 19,
+        "clip": true
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "rectangle",
+      "name": "EMS card border",
+      "x": 0,
+      "y": 0,
+      "width": 350,
+      "height": 340,
+      "parent": {
+        "$step": 121
+      },
+      "props": {
+        "fill": "#FFFFFF",
+        "cornerRadius": 19,
+        "rotation": 0,
+        "stroke": "#E4E9F2",
+        "strokeWeight": 1
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "rectangle",
+      "name": "EMS visual header",
+      "x": 0,
+      "y": 0,
+      "width": 350,
+      "height": 116,
+      "parent": {
+        "$step": 121
+      },
+      "props": {
+        "fill": "#E9F2FF",
+        "cornerRadius": [
+          19,
+          19,
+          0,
+          0
+        ],
+        "rotation": 0
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "vector",
+      "name": "ems icon",
+      "path": "M5 5 L19 5 L19 21 L5 21 Z M8 3 L8 7 M16 3 L16 7 M5 10 L19 10 M9 14 L15 14 L15 17 L9 17 Z",
+      "x": 28,
+      "y": 32,
+      "width": 46,
+      "height": 46,
+      "parent": {
+        "$step": 121
+      },
+      "props": {
+        "fills": [],
+        "stroke": "#496AF4",
+        "strokeWeight": 2.1,
+        "strokeCap": "round",
+        "strokeJoin": "round"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "EMS category label",
+      "text": "Events",
+      "x": 97,
+      "y": 47,
+      "parent": {
+        "$step": 121
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Semibold",
+        "fontSize": 12,
+        "lineHeight": 17,
+        "fill": "#496AF4",
+        "letterSpacing": 0,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "rectangle",
+      "name": "EMS header motif back",
+      "x": 238,
+      "y": 24,
+      "width": 61,
+      "height": 61,
+      "parent": {
+        "$step": 121
+      },
+      "props": {
+        "fill": "#E9F2FF",
+        "cornerRadius": 13,
+        "rotation": 20,
+        "stroke": "#C8D8FC",
+        "strokeWeight": 1
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "rectangle",
+      "name": "EMS header motif front",
+      "x": 259,
+      "y": 43,
+      "width": 45,
+      "height": 45,
+      "parent": {
+        "$step": 121
+      },
+      "props": {
+        "fill": "#E9F2FF",
+        "cornerRadius": 11,
+        "rotation": 20,
+        "stroke": "#C8D8FC",
+        "strokeWeight": 1
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "ellipse",
+      "name": "EMS header motif dot",
+      "x": 204,
+      "y": 42,
+      "width": 7,
+      "height": 7,
+      "parent": {
+        "$step": 121
+      },
+      "props": {
+        "fill": "#C8D8FC"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "EMS title",
+      "text": "EMS",
+      "x": 24,
+      "y": 132,
+      "parent": {
+        "$step": 121
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Semibold",
+        "fontSize": 28,
+        "lineHeight": 39,
+        "fill": "#1B2438",
+        "letterSpacing": -0.5,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "EMS full name",
+      "text": "Event Management System",
+      "x": 24,
+      "y": 173,
+      "parent": {
+        "$step": 121
+      },
+      "width": 302,
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Regular",
+        "fontSize": 13,
+        "lineHeight": 19,
+        "fill": "#64738B",
+        "letterSpacing": 0,
+        "textAutoResize": "height"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "EMS description",
+      "text": "Plan, organize, and deliver\nmeaningful events.",
+      "x": 24,
+      "y": 207,
+      "parent": {
+        "$step": 121
+      },
+      "width": 302,
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Regular",
+        "fontSize": 14,
+        "lineHeight": 20,
+        "fill": "#64738B",
+        "letterSpacing": 0,
+        "textAutoResize": "height"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "EMS static features",
+      "text": "Events  ·  Participants  ·  Reports",
+      "x": 24,
+      "y": 257,
+      "parent": {
+        "$step": 121
+      },
+      "width": 302,
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Regular",
+        "fontSize": 12,
+        "lineHeight": 17,
+        "fill": "#64738B",
+        "letterSpacing": 0,
+        "textAutoResize": "height"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "Open EMS",
+      "text": "Open EMS",
+      "x": 24,
+      "y": 292,
+      "parent": {
+        "$step": 121
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Semibold",
+        "fontSize": 14,
+        "lineHeight": 20,
+        "fill": "#1B2438",
+        "letterSpacing": 0,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "ellipse",
+      "name": "EMS circular action",
+      "x": 282,
+      "y": 282,
+      "width": 44,
+      "height": 44,
+      "parent": {
+        "$step": 121
+      },
+      "props": {
+        "fill": "#496AF4"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "vector",
+      "name": "arrow icon",
+      "path": "M4 12 L20 12 M14 6 L20 12 L14 18",
+      "x": 294,
+      "y": 294,
+      "width": 20,
+      "height": 20,
+      "parent": {
+        "$step": 121
+      },
+      "props": {
+        "fills": [],
+        "stroke": "#FFFFFF",
+        "strokeWeight": 1.8,
+        "strokeCap": "round",
+        "strokeJoin": "round"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "frame",
+      "name": "PMS application card",
+      "x": 20,
+      "y": 762,
+      "width": 350,
+      "height": 340,
+      "parent": {
+        "$step": 103
+      },
+      "props": {
+        "fill": "#FFFFFF",
+        "cornerRadius": 19,
+        "clip": true
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "rectangle",
+      "name": "PMS card border",
+      "x": 0,
+      "y": 0,
+      "width": 350,
+      "height": 340,
+      "parent": {
+        "$step": 136
+      },
+      "props": {
+        "fill": "#FFFFFF",
+        "cornerRadius": 19,
+        "rotation": 0,
+        "stroke": "#E4E9F2",
+        "strokeWeight": 1
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "rectangle",
+      "name": "PMS visual header",
+      "x": 0,
+      "y": 0,
+      "width": 350,
+      "height": 116,
+      "parent": {
+        "$step": 136
+      },
+      "props": {
+        "fill": "#F1EDFC",
+        "cornerRadius": [
+          19,
+          19,
+          0,
+          0
+        ],
+        "rotation": 0
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "vector",
+      "name": "pms icon",
+      "path": "M12 3 L22 8 L12 13 L2 8 Z M2 12 L12 17 L22 12 M2 16 L12 21 L22 16",
+      "x": 28,
+      "y": 32,
+      "width": 46,
+      "height": 46,
+      "parent": {
+        "$step": 136
+      },
+      "props": {
+        "fills": [],
+        "stroke": "#765CE3",
+        "strokeWeight": 2.1,
+        "strokeCap": "round",
+        "strokeJoin": "round"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "PMS category label",
+      "text": "Projects",
+      "x": 97,
+      "y": 47,
+      "parent": {
+        "$step": 136
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Semibold",
+        "fontSize": 12,
+        "lineHeight": 17,
+        "fill": "#765CE3",
+        "letterSpacing": 0,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "rectangle",
+      "name": "PMS header motif back",
+      "x": 238,
+      "y": 24,
+      "width": 61,
+      "height": 61,
+      "parent": {
+        "$step": 136
+      },
+      "props": {
+        "fill": "#F1EDFC",
+        "cornerRadius": 13,
+        "rotation": 20,
+        "stroke": "#D9CFF6",
+        "strokeWeight": 1
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "rectangle",
+      "name": "PMS header motif front",
+      "x": 259,
+      "y": 43,
+      "width": 45,
+      "height": 45,
+      "parent": {
+        "$step": 136
+      },
+      "props": {
+        "fill": "#F1EDFC",
+        "cornerRadius": 11,
+        "rotation": 20,
+        "stroke": "#D9CFF6",
+        "strokeWeight": 1
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "ellipse",
+      "name": "PMS header motif dot",
+      "x": 204,
+      "y": 42,
+      "width": 7,
+      "height": 7,
+      "parent": {
+        "$step": 136
+      },
+      "props": {
+        "fill": "#D9CFF6"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "PMS title",
+      "text": "PMS",
+      "x": 24,
+      "y": 132,
+      "parent": {
+        "$step": 136
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Semibold",
+        "fontSize": 28,
+        "lineHeight": 39,
+        "fill": "#1B2438",
+        "letterSpacing": -0.5,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "PMS full name",
+      "text": "Project Management System",
+      "x": 24,
+      "y": 173,
+      "parent": {
+        "$step": 136
+      },
+      "width": 302,
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Regular",
+        "fontSize": 13,
+        "lineHeight": 19,
+        "fill": "#64738B",
+        "letterSpacing": 0,
+        "textAutoResize": "height"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "PMS description",
+      "text": "Turn ideas into real progress\nwith your team.",
+      "x": 24,
+      "y": 207,
+      "parent": {
+        "$step": 136
+      },
+      "width": 302,
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Regular",
+        "fontSize": 14,
+        "lineHeight": 20,
+        "fill": "#64738B",
+        "letterSpacing": 0,
+        "textAutoResize": "height"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "PMS static features",
+      "text": "Tasks  ·  Timeline  ·  Collaboration",
+      "x": 24,
+      "y": 257,
+      "parent": {
+        "$step": 136
+      },
+      "width": 302,
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Regular",
+        "fontSize": 12,
+        "lineHeight": 17,
+        "fill": "#64738B",
+        "letterSpacing": 0,
+        "textAutoResize": "height"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "Open PMS",
+      "text": "Open PMS",
+      "x": 24,
+      "y": 292,
+      "parent": {
+        "$step": 136
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Semibold",
+        "fontSize": 14,
+        "lineHeight": 20,
+        "fill": "#1B2438",
+        "letterSpacing": 0,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "ellipse",
+      "name": "PMS circular action",
+      "x": 282,
+      "y": 282,
+      "width": 44,
+      "height": 44,
+      "parent": {
+        "$step": 136
+      },
+      "props": {
+        "fill": "#765CE3"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "vector",
+      "name": "arrow icon",
+      "path": "M4 12 L20 12 M14 6 L20 12 L14 18",
+      "x": 294,
+      "y": 294,
+      "width": 20,
+      "height": 20,
+      "parent": {
+        "$step": 136
+      },
+      "props": {
+        "fills": [],
+        "stroke": "#FFFFFF",
+        "strokeWeight": 1.8,
+        "strokeCap": "round",
+        "strokeJoin": "round"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "frame",
+      "name": "CRM application card",
+      "x": 20,
+      "y": 1120,
+      "width": 350,
+      "height": 340,
+      "parent": {
+        "$step": 103
+      },
+      "props": {
+        "fill": "#FFFFFF",
+        "cornerRadius": 19,
+        "clip": true
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "rectangle",
+      "name": "CRM card border",
+      "x": 0,
+      "y": 0,
+      "width": 350,
+      "height": 340,
+      "parent": {
+        "$step": 151
+      },
+      "props": {
+        "fill": "#FFFFFF",
+        "cornerRadius": 19,
+        "rotation": 0,
+        "stroke": "#E4E9F2",
+        "strokeWeight": 1
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "rectangle",
+      "name": "CRM visual header",
+      "x": 0,
+      "y": 0,
+      "width": 350,
+      "height": 116,
+      "parent": {
+        "$step": 151
+      },
+      "props": {
+        "fill": "#EAF5EF",
+        "cornerRadius": [
+          19,
+          19,
+          0,
+          0
+        ],
+        "rotation": 0
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "vector",
+      "name": "crm icon",
+      "path": "M12 7 A3 3 0 1 1 6 7 A3 3 0 1 1 12 7 M3 21 L3 19 A6 6 0 0 1 15 19 L15 21 M16 4 A3 3 0 0 1 16 10 M18 14 A6 6 0 0 1 21 19 L21 21",
+      "x": 28,
+      "y": 32,
+      "width": 46,
+      "height": 46,
+      "parent": {
+        "$step": 151
+      },
+      "props": {
+        "fills": [],
+        "stroke": "#2B8F74",
+        "strokeWeight": 2.1,
+        "strokeCap": "round",
+        "strokeJoin": "round"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "CRM category label",
+      "text": "Relationships",
+      "x": 97,
+      "y": 47,
+      "parent": {
+        "$step": 151
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Semibold",
+        "fontSize": 12,
+        "lineHeight": 17,
+        "fill": "#2B8F74",
+        "letterSpacing": 0,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "rectangle",
+      "name": "CRM header motif back",
+      "x": 238,
+      "y": 24,
+      "width": 61,
+      "height": 61,
+      "parent": {
+        "$step": 151
+      },
+      "props": {
+        "fill": "#EAF5EF",
+        "cornerRadius": 13,
+        "rotation": 20,
+        "stroke": "#C7E3D7",
+        "strokeWeight": 1
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "rectangle",
+      "name": "CRM header motif front",
+      "x": 259,
+      "y": 43,
+      "width": 45,
+      "height": 45,
+      "parent": {
+        "$step": 151
+      },
+      "props": {
+        "fill": "#EAF5EF",
+        "cornerRadius": 11,
+        "rotation": 20,
+        "stroke": "#C7E3D7",
+        "strokeWeight": 1
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "ellipse",
+      "name": "CRM header motif dot",
+      "x": 204,
+      "y": 42,
+      "width": 7,
+      "height": 7,
+      "parent": {
+        "$step": 151
+      },
+      "props": {
+        "fill": "#C7E3D7"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "CRM title",
+      "text": "CRM",
+      "x": 24,
+      "y": 132,
+      "parent": {
+        "$step": 151
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Semibold",
+        "fontSize": 28,
+        "lineHeight": 39,
+        "fill": "#1B2438",
+        "letterSpacing": -0.5,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "CRM full name",
+      "text": "Customer Relationship Management",
+      "x": 24,
+      "y": 173,
+      "parent": {
+        "$step": 151
+      },
+      "width": 302,
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Regular",
+        "fontSize": 13,
+        "lineHeight": 19,
+        "fill": "#64738B",
+        "letterSpacing": 0,
+        "textAutoResize": "height"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "CRM description",
+      "text": "Build stronger relationships\nand grow together.",
+      "x": 24,
+      "y": 207,
+      "parent": {
+        "$step": 151
+      },
+      "width": 302,
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Regular",
+        "fontSize": 14,
+        "lineHeight": 20,
+        "fill": "#64738B",
+        "letterSpacing": 0,
+        "textAutoResize": "height"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "CRM static features",
+      "text": "Contacts  ·  Companies  ·  Activities",
+      "x": 24,
+      "y": 257,
+      "parent": {
+        "$step": 151
+      },
+      "width": 302,
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Regular",
+        "fontSize": 12,
+        "lineHeight": 17,
+        "fill": "#64738B",
+        "letterSpacing": 0,
+        "textAutoResize": "height"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "Open CRM",
+      "text": "Open CRM",
+      "x": 24,
+      "y": 292,
+      "parent": {
+        "$step": 151
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Semibold",
+        "fontSize": 14,
+        "lineHeight": 20,
+        "fill": "#1B2438",
+        "letterSpacing": 0,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "ellipse",
+      "name": "CRM circular action",
+      "x": 282,
+      "y": 282,
+      "width": 44,
+      "height": 44,
+      "parent": {
+        "$step": 151
+      },
+      "props": {
+        "fill": "#2B8F74"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "vector",
+      "name": "arrow icon",
+      "path": "M4 12 L20 12 M14 6 L20 12 L14 18",
+      "x": 294,
+      "y": 294,
+      "width": 20,
+      "height": 20,
+      "parent": {
+        "$step": 151
+      },
+      "props": {
+        "fills": [],
+        "stroke": "#FFFFFF",
+        "strokeWeight": 1.8,
+        "strokeCap": "round",
+        "strokeJoin": "round"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "Mobile footer KIM",
+      "text": "KIM Communication",
+      "x": 20,
+      "y": 1484,
+      "parent": {
+        "$step": 103
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Regular",
+        "fontSize": 11,
+        "lineHeight": 15,
+        "fill": "#7E8BA1",
+        "letterSpacing": 0,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "node.create",
+    "params": {
+      "type": "text",
+      "name": "Mobile footer TAGTOG",
+      "text": "TAGTOG",
+      "x": 307,
+      "y": 1484,
+      "parent": {
+        "$step": 103
+      },
+      "props": {
+        "fontFamily": "Segoe UI",
+        "fontStyle": "Semibold",
+        "fontSize": 11,
+        "lineHeight": 15,
+        "fill": "#7E8BA1",
+        "letterSpacing": 0.5,
+        "textAutoResize": "widthAndHeight"
+      }
+    }
+  },
+  {
+    "command": "style.create",
+    "params": {
+      "type": "paint",
+      "name": "TAGTOG v2 / Canvas",
+      "from": {
+        "$step": 2
+      }
+    }
+  },
+  {
+    "command": "style.create",
+    "params": {
+      "type": "paint",
+      "name": "TAGTOG v2 / Dark sidebar",
+      "from": {
+        "$step": 3
+      }
+    }
+  },
+  {
+    "command": "style.create",
+    "params": {
+      "type": "paint",
+      "name": "TAGTOG v2 / Card surface",
+      "from": {
+        "$step": 56
+      }
+    }
+  },
+  {
+    "command": "style.create",
+    "params": {
+      "type": "paint",
+      "name": "TAGTOG v2 / EMS accent",
+      "from": {
+        "$step": 69
+      }
+    }
+  },
+  {
+    "command": "style.create",
+    "params": {
+      "type": "paint",
+      "name": "TAGTOG v2 / PMS accent",
+      "from": {
+        "$step": 84
+      }
+    }
+  },
+  {
+    "command": "style.create",
+    "params": {
+      "type": "paint",
+      "name": "TAGTOG v2 / CRM accent",
+      "from": {
+        "$step": 99
+      }
+    }
+  },
+  {
+    "command": "style.create",
+    "params": {
+      "type": "text",
+      "name": "TAGTOG v2 / Welcome display",
+      "from": {
+        "$step": 40
+      }
+    }
+  },
+  {
+    "command": "style.create",
+    "params": {
+      "type": "text",
+      "name": "TAGTOG v2 / Application title",
+      "from": {
+        "$step": 64
+      }
+    }
+  }
+]
