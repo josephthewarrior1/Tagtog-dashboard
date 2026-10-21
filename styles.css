@@ -60,3 +60,9 @@ main{padding:38px 44px 28px}.content-wrap{max-width:1400px;margin:0 auto}.welcom
 @media(max-width:350px){main{padding-left:17px;padding-right:17px}.topbar{padding-left:11px;padding-right:11px;gap:5px}.topbar-tools{gap:6px}.welcome h1{font-size:38px}.eyebrow{font-size:8px}.section-heading h2{font-size:21px}.section-heading>p{font-size:10px}.app-features{font-size:11px;gap:6px}.app-category{font-size:8px;letter-spacing:1.2px}.search-field input{font-size:11px}.search-field{padding-left:9px;padding-right:8px}}
 @media(max-height:620px){.sidebar{overflow-y:auto}.brand{margin-bottom:30px}.sidebar-bottom{padding-top:28px}.nav-label{margin-top:20px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* Official supplied TAGTOG logo */
+.brand.brand-official{display:block;margin:0 0 44px;padding:13px 9px;background:#fff;border-radius:12px}
+.brand-official .brand-wordmark{display:block;width:100%;height:auto}
+@media(max-width:1080px){.brand.brand-official{margin:0 0 42px;padding:12px 6px}}
+@media(max-width:760px){.brand.brand-official{margin:0 0 40px;padding:13px 9px}}

@@ -6,9 +6,9 @@
   <meta name="theme-color" content="#151C2D">
   <meta name="description" content="TAGTOG by KIM Communication. Your starting point for events, projects, and relationships.">
   <title>TAGTOG — Your workspace</title>
-  <link rel="icon" href="assets/tagtog-mark.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/tagtog-symbol.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
-  <script defer src="config.js"></script>
+
   <script defer src="app.js"></script>
 </head>
 <body>
@@ -26,14 +26,14 @@
     <symbol id="icon-guide" viewBox="0 0 24 24"><path d="M12 5C9 3 5 3 2 4v15c3-1 7-1 10 1 3-2 7-2 10-1V4c-3-1-7-1-10 1Zm0 0v15"/></symbol>
   </defs></svg>
   <aside class="sidebar" id="sidebar" aria-label="Main navigation" tabindex="-1">
-    <a class="brand" href="index.html" aria-label="TAGTOG home"><img class="brand-mark" src="assets/tagtog-mark.svg" width="34" height="34" alt=""><span class="brand-copy"><strong>tagtog<span>.</span></strong><small>WORKSPACE PORTAL</small></span></a>
+    <a class="brand brand-official" href="/" aria-label="TAGTOG home"><img class="brand-wordmark" src="/assets/tagtog-logo.svg" width="184" height="40" alt="TAGTOG — Technology, Operations, Growth"></a>
     <nav class="main-nav" aria-label="Workspaces">
       <button class="nav-item active" type="button" data-nav="home" aria-current="page"><svg class="icon" aria-hidden="true"><use href="#icon-home"/></svg><span>Overview</span><span class="nav-current" aria-hidden="true"></span></button>
       <p class="nav-label">YOUR APPLICATIONS</p>
       <button class="nav-item" type="button" data-open-app="ems"><svg class="icon" aria-hidden="true"><use href="#icon-event"/></svg><span>EMS<small>Event Management</small></span></button>
       <button class="nav-item" type="button" data-open-app="pms"><svg class="icon" aria-hidden="true"><use href="#icon-project"/></svg><span>PMS<small>Project Management</small></span></button>
       <button class="nav-item" type="button" data-open-app="crm"><svg class="icon" aria-hidden="true"><use href="#icon-relationship"/></svg><span>CRM<small>Customer Relationship</small></span></button>
-    </nav>
+    <a class="nav-item" id="access-nav" href="/admin" hidden><svg class="icon" aria-hidden="true"><use href="#icon-relationship"/></svg><span>Users &amp; access<small>Workspace administration</small></span></a></nav>
     <div class="sidebar-bottom"><button class="guide-button" type="button" data-action="guide"><svg class="icon" aria-hidden="true"><use href="#icon-guide"/></svg><span>Portal guide</span><svg class="icon guide-arrow" aria-hidden="true"><use href="#icon-arrow"/></svg></button><div class="sidebar-signature"><span class="signature-mark" aria-hidden="true">KIM</span><p>KIM Communication<small>Build. Create. Connect.</small></p></div></div>
   </aside>
   <div class="sidebar-backdrop" id="sidebar-backdrop" hidden></div>
@@ -43,12 +43,12 @@
       <p class="breadcrumb"><span>Workspace</span><span aria-hidden="true">/</span><strong>Overview</strong></p>
       <div class="topbar-tools">
         <div class="search-wrap"><div class="search-field"><svg class="icon" aria-hidden="true"><use href="#icon-search"/></svg><label class="sr-only" for="app-search">Search applications</label><input id="app-search" type="search" placeholder="Find your application..." autocomplete="off" spellcheck="false" aria-controls="search-results" aria-expanded="false"><kbd id="search-shortcut" aria-hidden="true">Ctrl K</kbd></div><div class="search-results" id="search-results" hidden></div></div>
-        <button class="profile-button" type="button" data-action="profile" aria-label="Open sample profile for Jo"><span class="avatar" aria-hidden="true">J</span><span class="profile-copy"><strong>Jo</strong><small>Sample profile</small></span><svg class="icon profile-chevron" aria-hidden="true"><use href="#icon-chevron"/></svg></button>
+        <button class="profile-button" type="button" data-action="profile" aria-label="Open your profile"><span class="avatar" aria-hidden="true">J</span><span class="profile-copy"><strong>Your account</strong><small>Loading workspace…</small></span><svg class="icon profile-chevron" aria-hidden="true"><use href="#icon-chevron"/></svg></button>
       </div>
     </header>
     <main id="main-content" tabindex="-1"><div class="content-wrap">
       <section class="welcome" aria-labelledby="page-title">
-        <div class="welcome-copy"><p class="eyebrow"><span aria-hidden="true"></span>WELCOME BACK, JO</p><h1 id="page-title">Your next move<br><span>starts here.</span></h1><p class="welcome-description">Events, projects, and relationships.<br>Choose where to begin.</p></div>
+        <div class="welcome-copy"><p class="eyebrow"><span aria-hidden="true"></span>WELCOME BACK</p><h1 id="page-title">Your next move<br><span>starts here.</span></h1><p class="welcome-description">Events, projects, and relationships.<br>Choose where to begin.</p></div>
         <div class="welcome-side">
           <svg class="workspace-art" viewBox="0 0 360 216" fill="none" aria-hidden="true">
             <ellipse cx="183" cy="186" rx="133" ry="14" fill="#E8EBF4"/><path d="M45 150C63 49 262 13 315 98" stroke="#D8DFEF" stroke-width="1.5" stroke-dasharray="4 6"/><path d="M41 103C69 205 285 199 318 115" stroke="#D8DFEF" stroke-width="1.5"/>
@@ -61,8 +61,8 @@
         </div>
       </section>
       <section class="applications" aria-labelledby="applications-title">
-        <div class="section-heading"><div><p class="section-eyebrow">FIND YOUR SPACE</p><h2 id="applications-title">Your applications</h2></div><p id="result-count" aria-live="polite">3 applications</p></div>
-        <div class="app-grid" id="app-grid"></div>
+        <div class="section-heading"><div><p class="section-eyebrow">FIND YOUR SPACE</p><h2 id="applications-title">Your applications</h2></div><p id="result-count" aria-live="polite">Loading applications…</p></div>
+        <p id="workspace-error" class="noscript-note" role="alert" hidden></p><div class="app-grid" id="app-grid"></div>
         <div class="empty-state" id="empty-state" hidden><span class="empty-icon"><svg class="icon" aria-hidden="true"><use href="#icon-search"/></svg></span><h3>No applications found</h3><p>Try EMS, PMS, CRM, or a different keyword.</p><button class="secondary-button" type="button" data-action="clear-search">Show all applications</button></div>
       </section>
       <footer class="page-footer"><span>One portal. Three ways to move forward.</span><span>KIM Communication <span aria-hidden="true">©</span> <span id="footer-year">2026</span></span></footer>

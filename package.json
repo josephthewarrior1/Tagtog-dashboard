@@ -1,0 +1,11 @@
+{
+  "name": "tagtog-portal",
+  "private": true,
+  "version": "0.2.0",
+  "description": "Local TAGTOG central login and access management",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "start": "node server.cjs",
+    "test": "node --test test/*.test.cjs"
+  }
+}

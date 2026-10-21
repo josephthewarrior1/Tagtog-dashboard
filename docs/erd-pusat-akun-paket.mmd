@@ -1,0 +1,74 @@
+erDiagram
+    direction LR
+    IAM_USERS ||--o{ ACCOUNT_MEMBERSHIPS : joins
+    IAM_USERS |o..o| ACCOUNTS : "owns personal"
+    ACCOUNTS ||--|{ ACCOUNT_MEMBERSHIPS : contains
+    ACCOUNTS ||--o{ ACCOUNT_SUBSCRIPTIONS : subscribes
+    PACKAGES ||--o{ PACKAGE_VERSIONS : versions
+    PACKAGE_VERSIONS ||--o{ ACCOUNT_SUBSCRIPTIONS : assigned
+    PACKAGE_VERSIONS ||--o{ PACKAGE_ENTITLEMENTS : permits
+    APPLICATIONS ||--o{ PERMISSIONS : defines
+    PERMISSIONS ||--o{ PACKAGE_ENTITLEMENTS : included
+
+    IAM_USERS {
+        bigint id PK
+        varchar email UK
+        varchar full_name
+        varchar status
+    }
+    ACCOUNTS {
+        uuid id PK
+        varchar type "PERSONAL or ORGANIZATION"
+        varchar name
+        bigint personal_owner_user_id FK, UK "nullable for organization"
+        varchar status
+    }
+    ACCOUNT_MEMBERSHIPS {
+        uuid id PK
+        uuid account_id FK
+        bigint iam_user_id FK
+        varchar account_role
+        varchar status
+        timestamptz valid_from
+        timestamptz valid_until "nullable"
+    }
+    ACCOUNT_SUBSCRIPTIONS {
+        uuid id PK
+        uuid account_id FK
+        bigint sequence_no
+        uuid package_version_id FK
+        timestamptz starts_at
+        timestamptz ends_at
+        varchar status
+        varchar expiry_policy
+        timestamptz read_only_until "nullable"
+    }
+    PACKAGES {
+        uuid id PK
+        varchar code UK
+        varchar name
+        varchar status
+    }
+    PACKAGE_VERSIONS {
+        uuid id PK
+        uuid package_id FK
+        int version
+        varchar status
+        timestamptz published_at "nullable while draft"
+    }
+    PACKAGE_ENTITLEMENTS {
+        uuid package_version_id PK, FK
+        uuid permission_id PK, FK
+    }
+    APPLICATIONS {
+        varchar code PK
+        varchar name
+        varchar status
+    }
+    PERMISSIONS {
+        uuid id PK
+        varchar application_code FK
+        varchar resource_code
+        varchar action_code
+        varchar status
+    }

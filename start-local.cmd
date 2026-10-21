@@ -1,19 +1,21 @@
 @echo off
 setlocal
 cd /d "%~dp0"
-echo TAGTOG by KIM Communication - local preview
-echo Buka http://127.0.0.1:4180/ di browser.
-echo Biarkan jendela ini terbuka selama portal digunakan.
-echo Tekan Ctrl+C untuk menghentikan server.
-where python >nul 2>nul
-if %errorlevel% equ 0 (
-    python -m http.server 4180 --bind 127.0.0.1
-) else (
-    where py >nul 2>nul
-    if errorlevel 1 (
-        echo Python 3 belum tersedia. Instal Python atau buka index.html langsung.
-    ) else (
-        py -3 -m http.server 4180 --bind 127.0.0.1
-    )
+where node >nul 2>nul
+if errorlevel 1 (
+    echo Node.js 20 or newer is required.
+    pause
+    exit /b 1
 )
+node local-stack.cjs prepare
+if errorlevel 1 goto failed
+node local-stack.cjs start
+if errorlevel 1 goto failed
+echo Open http://127.0.0.1:4180
+echo Local account details: .local\local-config.json
 pause
+exit /b 0
+:failed
+echo Check Docker Desktop and INTEGRATION-LOCAL.md.
+pause
+exit /b 1

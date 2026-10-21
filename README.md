@@ -1,59 +1,67 @@
-# TAGTOG — Portal aplikasi lokal
+# TAGTOG Dashboard
 
-Portal pemilih aplikasi EMS, PMS, dan CRM untuk KIM Communication. Desain kedua memakai sidebar gelap, judul sambutan yang lapang, dan tiga kartu aplikasi dengan panel berwarna. Fitur operasional tetap berada di aplikasi masing-masing.
+Portal workspace KIM Communication untuk mengakses EMS, PMS, dan CRM melalui satu pintu masuk. Versi ini mencakup dashboard, halaman login dengan logo resmi TAGTOG, server portal Node.js, dan prototipe pengaturan akses melalui EMS-IAM.
 
-## Menjalankan
+![Halaman login TAGTOG](previews/tagtog-login-desktop.jpg)
 
-1. Klik dua kali `start-local.cmd`.
-2. Buka **http://127.0.0.1:4180/** di browser.
-3. Biarkan jendela server terbuka selama portal digunakan. Tekan **Ctrl+C** untuk menghentikannya.
+## Status
 
-Python 3 harus tersedia melalui perintah `python` atau `py`. Alternatif: buka `index.html` langsung di browser untuk melihat portal dan dialog pratinjau tanpa server.
+- Halaman awal mengharuskan login. Login dan logout sudah dicoba dengan EMS-IAM pada lingkungan lokal terisolasi.
+- Portal menampilkan aplikasi berdasarkan hak akses dari IAM dan menyediakan halaman admin untuk user, role, dan pemetaan akun PMS.
+- Integrasi SSO PMS masih berupa prototipe lintas repositori. Pengujian menyeluruh portal → PMS belum selesai; source IAM dan PMS tidak disertakan di repo ini.
+- Integrasi EMS dan CRM belum diaktifkan.
+- Schema akun personal/perusahaan, paket, dan masa aktif masih **rancangan**, belum diimplementasikan. Lihat [rancangan schema dan ERD](docs/SCHEMA-PUSAT-DAN-ERD.md).
+- Kode ini untuk pengembangan lokal. Belum ada deployment produksi.
 
-Semua aset tersimpan dalam folder ini. Tidak ada font, gambar, atau pustaka yang dimuat dari layanan luar.
+## Menjalankan portal
 
-## Menghubungkan aplikasi
+Prasyarat: Node.js 20 atau lebih baru. Server portal tidak memakai dependensi npm tambahan.
 
-Ubah alamat pada `config.js`:
-
-```javascript
-window.PORTAL_CONFIG = {
-  appUrls: {
-    ems: "https://alamat-ems.example.com",
-    pms: "https://alamat-pms.example.com",
-    crm: "https://alamat-crm.example.com"
-  }
-};
+```bash
+git clone https://github.com/josephthewarrior1/Tagtog-dashboard.git
+cd Tagtog-dashboard
+npm start
 ```
 
-Nilai kosong membuka dialog pratinjau. Alamat HTTP/HTTPS diperbolehkan; protokol lain dan alamat yang berisi kredensial ditolak. Path relatif, misalnya `/ems/`, dapat digunakan ketika portal dijalankan melalui server. Aplikasi yang telah dikonfigurasi terbuka di tab baru.
+Buka **http://127.0.0.1:4180/**. Halaman login dapat dilihat saat server portal berjalan, tetapi proses masuk memerlukan EMS-IAM yang tersedia. Secara default, IAM berada di `http://127.0.0.1:8181`, PMS API di `http://127.0.0.1:8182`, dan PMS web di `http://127.0.0.1:8184`.
 
-Portal ini belum memiliki login IAM atau backend. Profil Jo adalah contoh. Otentikasi, sesi login, dan hak akses perlu ditangani oleh IAM/backend dan aplikasi tujuan ketika integrasi dilakukan.
+Alamat layanan dapat diatur melalui environment variable `TAGTOG_ORIGIN`, `TAGTOG_IAM_URL`, `TAGTOG_PMS_API_URL`, dan `TAGTOG_PMS_URL`. Server membaca environment proses dan konfigurasi lokal; file `.env` tidak dimuat otomatis. Jangan membuka `index.html` langsung atau memakai server statis untuk alur autentikasi.
 
-## Interaksi
+Untuk stack integrasi lengkap di mesin pengembangan yang sudah memiliki repo EMS-IAM dan PMS beserta penyesuaiannya, ikuti [panduan integrasi lokal](INTEGRATION-LOCAL.md). `start-local.cmd` menjalankan penyiapan stack tersebut dan membutuhkan Docker Desktop, Java 21, repo terkait, serta executable JAR yang sudah dibangun. Perintah itu bukan pemasang repo IAM/PMS.
 
-- Cari aplikasi berdasarkan singkatan, nama, deskripsi, atau kata fitur.
-- Tekan **Ctrl+K**, **⌘+K**, atau **/** untuk mencari.
-- Gunakan **↑/↓** dan **Enter** untuk memilih hasil pencarian.
-- Tekan **Esc** untuk menutup dialog, hasil pencarian, atau navigasi mobile.
-- Menu mobile mendukung navigasi keyboard dan mengembalikan fokus setelah ditutup.
+## Pengujian
+
+```bash
+npm test
+```
+
+Pengujian portal memakai server HTTP dan layanan IAM tiruan yang terisolasi. Tidak memerlukan database atau kredensial produksi. Script uji integrasi manual berada terpisah dari suite ini; keberadaannya bukan bukti bahwa seluruh alur PMS sudah lolos pengujian.
 
 ## Struktur
 
-- `index.html` — struktur halaman dan ikon SVG.
-- `styles.css` — tema, tata letak desktop/mobile, dan fokus keyboard.
-- `app.js` — pencarian, pratinjau aplikasi, navigasi, dan jam Jakarta.
-- `config.js` — alamat tujuan EMS/PMS/CRM.
-- `assets/` — logo TAGTOG serta aset tersimpan dari versi sebelumnya. Ilustrasi portal saat ini memakai SVG lokal pada halaman.
+| File/folder | Isi |
+| --- | --- |
+| `login.html`, `auth.css`, `login.js` | Tampilan login desktop/mobile dan pengiriman kredensial ke server portal |
+| `index.html`, `styles.css`, `app.js` | Dashboard aplikasi dan navigasi |
+| `admin.html`, `admin.css`, `admin.js` | Antarmuka user, role, dan tautan akun PMS |
+| `server.cjs` | Server portal, sesi, dan penghubung API IAM/PMS |
+| `local-stack.cjs`, `start-local.cmd` | Helper lingkungan integrasi lokal |
+| `assets/` | Logo resmi dan aset lokal |
+| `previews/` | Screenshot login desktop/mobile terbaru |
+| `design/` | Sumber FigCraft dan ekspor desain pendamping versi sebelumnya |
+| `docs/` | Audit integrasi, rancangan schema pusat, dan ERD Mermaid |
+| `test/` | Pengujian portal dan script integrasi manual |
 
-Tidak ada proses build, dependensi npm, pelacakan analitik, atau penyimpanan data pengguna.
+## Konfigurasi privat
 
-## Sumber desain
+`.local/`, `.env`, `.env.*` (kecuali `.env.example`), `node_modules/`, log, dan coverage diabaikan Git. Akun uji, password database, secret SSO, signing key, database, dan checkout IAM/PMS lokal tidak disertakan. Konfigurasi akun lokal yang dibuat helper tersimpan dalam `.local/local-config.json`; jangan mengunggah file tersebut.
 
-Folder `design/` berisi sumber desain pendamping:
+Token IAM ditahan di server portal dan browser memakai cookie sesi HttpOnly. Penyimpanan sesi portal masih di memori untuk pratinjau satu proses. Deployment kelak memerlukan konfigurasi domain/HTTPS dan penyimpanan sesi bersama.
 
-- `tagtog-portal.figcraft` — desain desktop dan mobile yang dapat diedit dengan FigCraft 0.8.0.
-- `desktop-design.png` — ekspor tampilan desktop.
-- `mobile-design.png` — ekspor tampilan mobile.
+## Rancangan integrasi
 
-Desain kedua memakai sidebar gelap, sambutan tipografis, ilustrasi tiga ruang kerja, serta kartu EMS/PMS/CRM dengan panel warna masing-masing. Banner foto arsitektur telah diganti. Dokumen FigCraft berisi layer yang dapat diedit untuk desktop dan mobile.
+- [Audit schema EMS, PMS, dan CRM](docs/RENCANA-INTEGRASI-AKUN.md)
+- [Schema pusat, akun, paket, masa aktif, dan ERD](docs/SCHEMA-PUSAT-DAN-ERD.md)
+- [ERD akun dan paket](docs/erd-pusat-akun-paket.mmd)
+- [ERD role dan akses](docs/erd-pusat-role-akses.mmd)
+- [ERD penghubung aplikasi](docs/erd-pusat-penghubung-aplikasi.mmd)

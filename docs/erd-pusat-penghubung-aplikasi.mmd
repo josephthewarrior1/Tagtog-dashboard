@@ -1,0 +1,46 @@
+erDiagram
+    direction LR
+    IAM_USERS ||--o{ ACCOUNT_MEMBERSHIPS : joins
+    IAM_USERS ||--o{ APPLICATION_IDENTITIES : maps
+    APPLICATIONS ||--o{ APPLICATION_IDENTITIES : identifies
+    ACCOUNT_MEMBERSHIPS ||--o{ MEMBERSHIP_APP_IDENTITIES : selects
+    APPLICATION_IDENTITIES ||--o{ MEMBERSHIP_APP_IDENTITIES : resolves
+    ACCOUNTS ||--|{ ACCOUNT_MEMBERSHIPS : contains
+    ACCOUNTS ||--o{ ACCOUNT_APPLICATION_LINKS : connects
+    APPLICATIONS ||--o{ ACCOUNT_APPLICATION_LINKS : hosts
+
+    IAM_USERS {
+        bigint id PK
+    }
+    ACCOUNTS {
+        uuid id PK
+        varchar type
+    }
+    APPLICATIONS {
+        varchar code PK
+    }
+    ACCOUNT_MEMBERSHIPS {
+        uuid id PK
+        uuid account_id FK
+        bigint iam_user_id FK
+    }
+    APPLICATION_IDENTITIES {
+        uuid id PK
+        bigint iam_user_id FK
+        varchar application_code FK
+        varchar local_user_id
+        varchar status
+    }
+    MEMBERSHIP_APP_IDENTITIES {
+        uuid membership_id PK, FK
+        varchar application_code PK, FK
+        bigint iam_user_id FK
+        uuid application_identity_id FK
+    }
+    ACCOUNT_APPLICATION_LINKS {
+        uuid id PK
+        uuid account_id FK
+        varchar application_code FK
+        varchar local_workspace_id
+        varchar status
+    }

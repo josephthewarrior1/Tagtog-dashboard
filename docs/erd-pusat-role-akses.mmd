@@ -1,0 +1,46 @@
+erDiagram
+    direction LR
+    ACCOUNTS ||--|{ ACCOUNT_MEMBERSHIPS : contains
+    ACCOUNTS ||--o{ ACCOUNT_ROLES : defines
+    ACCOUNT_MEMBERSHIPS ||--o{ MEMBERSHIP_ROLES : receives
+    ACCOUNT_ROLES ||--o{ MEMBERSHIP_ROLES : assigned
+    ACCOUNT_ROLES ||--o{ ROLE_PERMISSIONS : permits
+    APPLICATIONS ||--o{ PERMISSIONS : defines
+    PERMISSIONS ||--o{ ROLE_PERMISSIONS : included
+
+    ACCOUNTS {
+        uuid id PK
+        varchar type
+    }
+    ACCOUNT_MEMBERSHIPS {
+        uuid id PK
+        uuid account_id FK
+        bigint iam_user_id FK
+        varchar account_role "account administration"
+        timestamptz valid_until "nullable"
+    }
+    ACCOUNT_ROLES {
+        uuid id PK
+        uuid account_id FK
+        varchar code
+        varchar name
+        varchar status
+    }
+    MEMBERSHIP_ROLES {
+        uuid account_id FK
+        uuid membership_id PK, FK
+        uuid role_id PK, FK
+    }
+    ROLE_PERMISSIONS {
+        uuid role_id PK, FK
+        uuid permission_id PK, FK
+    }
+    APPLICATIONS {
+        varchar code PK
+    }
+    PERMISSIONS {
+        uuid id PK
+        varchar application_code FK
+        varchar resource_code
+        varchar action_code
+    }

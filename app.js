@@ -12,6 +12,7 @@
   const mobileQuery = window.matchMedia("(max-width: 760px)");
   let focusBeforeDialog = null;
   let focusBeforeMenu = null;
+  let portalSession = null;
 
   const applications = [
     {
@@ -48,7 +49,7 @@
 
   // Only HTTP(S) destinations are allowed. Empty or invalid values remain previews.
   function getApplicationUrl(id) {
-    const value = window.PORTAL_CONFIG?.appUrls?.[id];
+    const value = portalSession?.apps?.find(app => app.id === id)?.launchUrl;
     if (typeof value !== "string" || !value.trim()) return null;
     try {
       const url = new URL(value.trim(), document.baseURI);
@@ -85,7 +86,7 @@
 
   function matchingApplications() {
     const query = search.value.trim().toLocaleLowerCase();
-    return applications.filter(application => [
+    return applications.filter(application => portalSession?.apps?.some(app => app.id === application.id)).filter(application => [
       application.name, application.fullName, application.description, ...application.features
     ].join(" ").toLocaleLowerCase().includes(query));
   }
@@ -134,6 +135,7 @@
   }
 
   function openApplication(id, trigger) {
+    if (!portalSession?.apps?.some(app => app.id === id)) return;
     const application = applications.find(item => item.id === id);
     if (!application) return;
     const url = getApplicationUrl(id);
@@ -175,11 +177,14 @@
   }
 
   function openProfile(trigger) {
+    const user = portalSession?.user;
+    if (!user) return;
     openDialog(`
-      <div class="profile-detail"><span class="avatar" aria-hidden="true">J</span><div><h2 id="dialog-title">Hi, Jo</h2><p>Sample profile · KIM Communication</p></div></div>
-      <p class="dialog-copy">Welcome to your TAGTOG portal preview.</p>
-      <div class="preview-notice">This is a sample profile. A live account and IAM login have not been connected.</div>
-      <div class="dialog-actions"><button class="primary-button" type="button" data-action="close-dialog" data-autofocus>Back to portal</button></div>
+      <div class="profile-detail"><span class="avatar" aria-hidden="true">${escapeHtml(user.fullName?.slice(0,1)||'?')}</span><div><h2 id="dialog-title">${escapeHtml(user.fullName)}</h2><p>${escapeHtml(user.email)}</p></div></div>
+      <p class="dialog-copy">${portalSession.isAdmin?'Workspace administrator':'KIM Communication account'}</p>
+      <div class="preview-notice">Signing out here also ends your connected PMS sessions.</div>
+      <p id="logout-error" class="dialog-copy" role="alert" hidden></p>
+      <div class="dialog-actions"><button class="primary-button" type="button" data-action="logout" data-autofocus>Sign out all workspaces</button><button class="secondary-button" type="button" data-action="close-dialog">Back</button></div>
     `, trigger);
   }
 
@@ -240,6 +245,7 @@
       case "menu": return sidebar.classList.contains("mobile-open") ? closeMenu() : openMenu();
       case "guide": return openGuide(trigger);
       case "profile": return openProfile(trigger);
+      case "logout": return logout(trigger);
       case "close-dialog": return dialog.close();
       case "clear-search": clearSearch(); search.focus(); return;
     }
@@ -315,7 +321,37 @@
 
   if (/Mac|iPhone|iPad/.test(navigator.platform)) $("#search-shortcut").textContent = "⌘ K";
   sidebar.inert = mobileQuery.matches;
-  renderApplications();
+  async function logout(button) {
+    button.disabled=true;
+    try {
+      const response=await fetch('/api/auth/logout',{method:'POST',headers:{'Content-Type':'application/json','X-CSRF-Token':portalSession.csrfToken},body:'{}'});
+      const result=await response.json();
+      if(!response.ok)throw new Error(result.error?.message||'Unable to sign out. Please try again.');
+      location.assign('/login');
+    }catch(error){const message=$('#logout-error');message.textContent=error.message;message.hidden=false;button.disabled=false;}
+  }
+  async function loadSession() {
+    try {
+      const response=await fetch('/api/session',{cache:'no-store'});
+      if(response.status===401){location.assign('/login');return;}
+      const data=await response.json();
+      if(!response.ok)throw new Error(data.error?.message||'Unable to load your workspace.');
+      portalSession=data;
+      const name=data.user.fullName||data.user.email;
+      $('.profile-copy strong').textContent=name;
+      $('.profile-copy small').textContent=data.isAdmin?'Administrator':'Workspace member';
+      $('.profile-button').setAttribute('aria-label','Open profile for '+name);
+      $('.profile-button .avatar').textContent=name.slice(0,1).toUpperCase();
+      $('.welcome-copy .eyebrow').lastChild.textContent='WELCOME BACK, '+name.split(' ')[0].toUpperCase();
+      $$('nav [data-open-app]').forEach(button=>{button.hidden=!data.apps.some(app=>app.id===button.dataset.openApp);});
+      $('#access-nav').hidden=!data.isAdmin;
+      $('#workspace-error').hidden=true;
+      renderApplications();
+      if(!data.apps.length){$('#empty-state h3').textContent='Your workspace is being prepared';$('#empty-state p').textContent='Ask your administrator to give you application access.';}
+    }catch(error){portalSession=null;$('#app-grid').replaceChildren();$('#result-count').textContent='';$('#workspace-error').textContent=error.message;$('#workspace-error').hidden=false;$$('nav [data-open-app]').forEach(button=>{button.hidden=true;});$('#access-nav').hidden=true;}
+  }
+  window.addEventListener('focus',loadSession);
+  loadSession();
   updateClock();
   window.setInterval(updateClock, 30000);
 })();

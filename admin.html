@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#151C2D">
+  <meta name="referrer" content="no-referrer">
+  <title>Users & Access — TAGTOG</title>
+  <link rel="icon" href="/assets/tagtog-symbol.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="admin.css">
+  <script defer src="admin.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <aside class="sidebar" aria-label="Access administration">
+    <a class="brand brand-official" href="/" aria-label="TAGTOG home"><img class="brand-wordmark" src="/assets/tagtog-logo.svg" width="184" height="40" alt="TAGTOG — Technology, Operations, Growth"></a>
+    <a class="back-link" href="/">← Back to workspace</a>
+    <p class="nav-label">ADMINISTRATION</p>
+    <nav class="admin-tabs" role="tablist" aria-label="Access sections">
+      <button id="users-tab" type="button" role="tab" aria-selected="true" aria-controls="users-panel" data-tab="users">Users<span>Accounts and assigned roles</span></button>
+      <button id="roles-tab" type="button" role="tab" aria-selected="false" aria-controls="roles-panel" data-tab="roles" tabindex="-1">Roles & permissions<span>Application and CRUD access</span></button>
+      <button id="links-tab" type="button" role="tab" aria-selected="false" aria-controls="links-panel" data-tab="links" tabindex="-1">PMS account links<span>Explicit identity mapping</span></button>
+    </nav>
+    <p class="sidebar-foot">KIM Communication<br><span>Users & Access</span></p>
+  </aside>
+
+  <div class="workspace">
+    <header class="topbar"><span>Workspace <span aria-hidden="true">/</span> <strong>Users & Access</strong></span><div id="admin-profile" class="admin-profile"></div></header>
+    <main id="main" tabindex="-1">
+      <div class="page-intro"><p class="eyebrow">ACCESS ADMINISTRATION</p><h1>Users & Access</h1><p>Manage central accounts, application permissions, and PMS identity links.</p></div>
+      <div id="page-message" class="message" role="status" aria-live="polite" hidden></div>
+      <div id="loading-state" class="loading" role="status">Checking administrator access…</div>
+      <div id="admin-content" hidden>
+        <section id="users-panel" role="tabpanel" aria-labelledby="users-tab">
+          <div class="section-heading"><div><h2>Central accounts</h2><p id="user-count">IAM users</p></div><button class="primary-button" type="button" data-action="create-user">+ Create user</button></div>
+          <div class="toolbar"><label class="search-field"><span class="sr-only">Search users</span><input id="user-search" type="search" placeholder="Search by name or email" autocomplete="off"></label><button class="secondary-button" type="button" data-action="refresh-users">Refresh</button></div>
+          <div id="users-table" class="table-wrap"></div>
+        </section>
+        <section id="roles-panel" role="tabpanel" aria-labelledby="roles-tab" hidden>
+          <div class="section-heading"><div><h2>Roles & permissions</h2><p>Assign applications and the operations each role can use.</p></div><button class="primary-button" type="button" data-action="create-role">+ Create role</button></div>
+          <div id="roles-list" class="role-grid"></div>
+        </section>
+        <section id="links-panel" role="tabpanel" aria-labelledby="links-tab" hidden>
+          <div class="section-heading"><div><h2>PMS account links</h2><p>Connect a central identity to the correct existing PMS account.</p></div><button class="secondary-button" type="button" data-action="refresh-links">Refresh</button></div>
+          <div class="notice"><strong>Link accounts explicitly.</strong> Select both records yourself. Email addresses are shown for reference; accounts are never linked by matching email.</div>
+          <div id="mapping-form"></div>
+          <div id="links-table" class="table-wrap"></div>
+        </section>
+      </div>
+      <footer>KIM Communication <span>TAGTOG · Access administration</span></footer>
+    </main>
+  </div>
+
+  <dialog id="admin-dialog" aria-labelledby="dialog-title"><button class="dialog-close" type="button" data-action="close-dialog" aria-label="Close dialog">×</button><div id="dialog-content"></div></dialog>
+</body>
+</html>
